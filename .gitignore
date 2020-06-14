@@ -4,3 +4,6 @@ db.sqlite3
 home
 Dockerfile
 requirements.txt
+static/*
+media/*
+*/migrations/*
