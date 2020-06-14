@@ -1,0 +1,6 @@
+.venv
+Dockerfile
+db.sqlite3
+home
+Dockerfile
+requirements.txt
