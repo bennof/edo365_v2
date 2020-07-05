@@ -1,0 +1,5 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<figure>
+    {% image value.src  %}
+    <figcaption>{% include_block value.description %}</figcaption>  
+</figure>

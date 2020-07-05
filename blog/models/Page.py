@@ -17,6 +17,7 @@ class Page(WPage):
     intro = models.CharField(max_length=250)
     tags = ClusterTaggableManager(through=Tag, blank=True)
     categories = ParentalManyToManyField('Category', blank=True)
+    showdashboard = models.BooleanField(default = False, verbose_name="Show on Dashboard")
 
     hero = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True,
@@ -44,6 +45,7 @@ class Page(WPage):
             FieldPanel('date'),
             FieldPanel('tags'),
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
+            FieldPanel('showdashboard'),
         ], heading="Blog information"),
         FieldPanel('intro'),
         ImageChooserPanel('hero'),

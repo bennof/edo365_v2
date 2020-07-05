@@ -1,14 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-from ..models import Robots
-
-
-# create robots.txt
-def robots(request):
-    r = Robots.for_site(request.site)
-    return HttpResponse(r.robots, content_type="text/plain")
+from wagtail.core.models import Page as WPage
+from ..models import Page
 
 
-def presenter(request):
-    return HttpResponse("presenter", content_type="text/plain")
+
+
+def dashboard(request):
+    return HttpResponse("presenter: "+request.path, content_type="text/plain")

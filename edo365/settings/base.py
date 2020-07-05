@@ -26,9 +26,10 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     'search',
 
+    'edocore',
     'blog',
     'edox',
-    'djusers',
+    
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -64,6 +65,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
+    'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
@@ -102,7 +104,7 @@ DATABASES = {
 }
 
 # Change Usermodel
-AUTH_USER_MODEL = 'djusers.User'
+AUTH_USER_MODEL = 'edocore.User'
 
 
 # Password validation

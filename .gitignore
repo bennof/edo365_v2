@@ -2,8 +2,10 @@
 Dockerfile
 db.sqlite3
 home
-Dockerfile
-requirements.txt
 static/*
 media/*
 */migrations/*
+!*/migrations/__init__.py
+Pipfile.lock
+*.pyc
+secret.txt

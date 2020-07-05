@@ -1,0 +1,147 @@
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+}
+
+header {
+    position: fixed;
+    background: #484848;
+    top: 0px;
+    vertical-align: middle;
+    line-height: 40px;
+    height: 40px;
+    left: 0px;
+    right: 0px;
+}
+
+header::after {
+    clear: both;
+}
+
+header h1,
+header > * {
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px;
+    line-height: 40px;
+    margin: 0px;
+    font-size: 18px;
+}
+
+header > .logo {
+    margin-left: 10px;
+    float: left;
+    color: #03ade0;
+    font-weight: 100;
+}
+
+header > label.menu {
+    float: right;
+    cursor: pointer;
+    color: #03ade0;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+header > input[type=checkbox].menu {
+    visibility: hidden;
+}
+header > input[type=checkbox].menu:checked ~ ul.menu {
+    display: block;
+}
+
+header img,
+header svg {
+    stroke: #03ade0;
+    height: 30px;
+    vertical-align: middle;
+}
+
+header .logo:hover,
+header img:hover,
+header svg:hover {
+    stroke: #036ae0;
+    color: #036ae0;
+}
+
+header > ul.menu {
+    height: auto;
+    display: none;
+    position: fixed;
+    top: 40px;
+    padding: 0;
+    max-height: calc(1vh -40px);
+    max-width: 100%;
+    min-width: 150px;
+    overflow: auto;
+    z-index:800;
+    background: #484848;
+    right: 0px;
+    border-radius: 2px;
+    border-left: 3px solid  #03ade0;
+}
+
+header > ul.menu > li {
+    list-style-type: none;
+}
+
+header > ul.menu > li form.search,
+header > ul.menu > li a {
+    display: block;
+    padding: 5px;
+    padding-left: 20px;
+    color: #666666;
+    text-decoration: none;
+    width: 100%;
+    background: none;
+}
+
+header > ul.menu > li form.search button,
+header > ul.menu > li form.search input{
+    border: none;
+    background: none;
+    height: 25px;
+    padding: 0;
+    margin :0;
+    outline: 0;
+    font-size: 12pt;
+    color: #666666;
+}
+
+header > ul.menu > li form.search input[type=text]{
+    /*border: 1px solid #666666;*/
+    border-radius: 3px;
+    background-color: #323232;
+    padding: 2px;
+}
+
+
+
+
+footer {
+    background: #fefefe;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+    height: 20px;
+    width: 100%;
+    font-size: smaller;
+}
+
+.has-header {
+    margin-top: 40px;
+}
+
+article {
+    width: 100%;
+}
+
+article section {
+    width: 100%;
+}
+
+article section > *  {
+    margin: 10px auto; 
+}

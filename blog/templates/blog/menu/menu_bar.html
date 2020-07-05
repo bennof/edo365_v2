@@ -1,0 +1,48 @@
+{% load menu_tags %}
+{% load wagtailimages_tags %}
+{% load static %}
+ 
+{% get_menu settings.blog.MenuSettings.default_menu as navigation %}
+
+<header>
+    <a class="logo" href="/">
+    {% if settings.blog.MenuSettings.logo %}
+        {% image settings.blog.MenuSettings.logo height-40 alt=settings.blog.MenuSettings.name %}
+    {% elif settings.blog.MenuSettings.static_logo %}
+        <img src="{% static settings.blog.MenuSettings.static_logo %}" alt="{{ settings.blog.MenuSettings.name }}" />
+    {% else %}
+        <h1 class="logo">{{ settings.blog.MenuSettings.name }}</h1></a>
+    {% endif %}
+    </a>
+    <label for="menu_switch" class="menu">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none"  stroke-width="4" stroke-linecap="round"  >
+                <path  d="M 4,8 L 28,8" />
+                <path  d="M 4,16 L 28,16" />
+                <path  d="M 4,24 L 28,24" />
+            </g>
+        </svg>
+    </label>
+    <input type="checkbox" id="menu_switch" class="menu">
+
+    <!-- menu items -->
+    <ul class="menu">
+        <li><form class="search" action="{% url 'search' %}" method="get">
+            <button type="submit">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10"  stroke-width="3" fill="none"/>
+                        <line x1="31" y1="31" x2="22" y2="22" stroke-width="2" />
+                    </svg>
+            </button>
+            <input type="text" placeholder="Search.." name="query" value="{{ search_query }}">
+        </form></li>
+        {% for item in navigation.menu_items.all %}
+            <li>
+                <a href="{{ item.link }}" 
+                    {% if item.open_in_new_tab %} target="_blank"{% endif %}>
+                    {{ item.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</header>
