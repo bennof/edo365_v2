@@ -1,0 +1,227 @@
+$text-color: #35393C;
+$text-hl-color: #5fc2f0;
+
+$header_bg_color: $text-color !default;
+$header_bg_color_hl: darken( $color:$header_bg_color, $amount: 0.4) !default;
+$header_color: $text-hl-color !default;
+$header_color_hl: $text-hl-color !default;
+
+$header_height: 40px !default;
+$header_height_inner: #{$header_height - 10px} !default;
+
+$header_font_size: 12pt !default;
+$header_font_weight: 100 !default;
+
+html, 
+body  {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16pt;
+    color: $text-color;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+a {
+    text-decoration: none;
+    color: $text-hl-color;
+}
+
+a:hover {
+    color: darken($color: $text-hl-color, $amount: 0.3);
+}
+
+header {
+    position: fixed;
+    background-color: $header_bg_color;
+    top: 0px;
+    vertical-align: middle;
+    line-height: $header_height;
+    height: $header_height;
+    left: 0px;
+    right: 0px;
+    z-index:500;
+    font-size: $header_font_size;
+    
+
+    & h1,
+    &  > * {
+        display: inline-block;
+        vertical-align: middle;
+        height: $header_height;
+        line-height: $header_height;
+        margin: 0px;
+        font-size: $header_font_size;
+        font-family: 'Neue Helvetica', Helvetica, sans-serif;
+    }
+
+    & > .logo {
+        margin-left: 10px;
+        float: left;
+        color: $header_color_hl;
+        font-weight: $header_font_weight;
+
+        &:hover {
+            color: lighten($header_color_hl, 20);
+        }
+    }
+
+    & > label.menu {
+        float: right;
+        cursor: pointer;
+        color: $header_color_hl;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+
+    & > input[type=checkbox].menu {
+        visibility: hidden;
+    }
+
+    & > input[type=checkbox].menu:checked ~ ul.menu {
+        display: block;
+    }
+
+    & > ul.menu {
+        height: auto;
+        display: none;
+        position: fixed;
+        top: $header_height;
+        padding: 0;
+        max-height: calc(100% - #{$header_height});
+        max-width: 100%;
+        min-width: 150px;
+        overflow: auto;
+        z-index:800;
+        background: rgba($header_bg_color, 1.0);
+        right: 0px;
+        border-radius: 2px;
+        border-left: 3px solid  $header_color;
+    
+        & > li {
+            display: block;
+            list-style-type: none;
+
+            form.search, a {
+                display: block;
+                padding: 5px;
+                padding-left: 20px;
+                color: $header_color;
+                text-decoration: none;
+                width: 100%;
+                background: none;
+
+                button,
+                input{
+                    border: none;
+                    background: none;
+                    height: $header_height_inner;
+                    padding: 0;
+                    margin :0;
+                    outline: 0;
+                    font-size: $header_font_size;
+                    color: $header_color;
+                }
+                
+                input[type=text]{
+                    border-bottom: 1px solid $header_color;
+                }
+            }
+            
+            a:hover {
+                color: $header_color_hl;
+                background: $header_bg_color_hl;
+            }
+        }
+    }
+
+    img, svg {
+        stroke: $header_color_hl;
+        height: $header_height_inner;
+        vertical-align: middle;
+        &:hover {
+            stroke: lighten($header_color_hl, 20);
+        }
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+.has-menubar {
+    margin-top: $header_height;
+    min-height: calc(100vh-$header_height);
+}
+/* END HEADER */
+
+article {
+    width: 100%;
+
+    .content,
+    figure,
+    section {
+        padding: 0;
+        max-width: 600px; 
+        margin: 0 auto;
+        line-height: 1.3em;
+    }
+
+    .code code {
+        font-size: smaller;
+    }
+
+    section.header {
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        /*background-color: $text-color;*/
+        background-attachment: fixed;
+        background-blend-mode: screen;
+        overflow: hidden;
+
+        .content {
+            margin-top: 30px;
+        }
+
+        img.bg {
+            pointer-events: none;
+            position: absolute;
+            object-fit: cover;
+            filter: brightness(0.5);
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        color: white;
+        min-height: 50vh;
+        font-weight: 100;
+        font-family: 'Neue Helvetica', Helvetica, sans-serif;
+    }
+
+    
+
+    section.footer {
+        font-size: smaller;
+    }
+}
+
+.has-menubar {
+    margin-top: $header_height;
+}
+
+
+footer {
+    font-family: 'Neue Helvetica', Helvetica, sans-serif;
+    color: grey;
+    font-size: small;
+    text-align: center;
+}

@@ -9,7 +9,7 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.core.models import Page 
 
 from wagtail.search import index
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from .tag import Tag
@@ -53,7 +53,7 @@ class EDoX(Page):
         ], heading="Blog information"),
         FieldPanel('intro'),
         ImageChooserPanel('hero'),
-        FieldPanel('body'),
+        StreamFieldPanel('body'),
     ]
 
     class Meta:

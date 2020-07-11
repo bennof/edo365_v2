@@ -1,0 +1,20 @@
+{% load wagtailcore_tags %}
+<footer>
+    {% if settings.edocore.SiteConfig.footer_richt_text %}
+    <div>
+        {{settings.edocore.SiteConfig.footer_richt_text|richtext }}
+    </div>
+    {% endif %}
+    <p>© {{ settings.edocore.SiteConfig.copyright}} | <a href="{{settings.edocore.SiteConfig.contact}}">Contact</a></p>
+    <p>
+        {% if settings.edocore.SiteConfig.impress %}
+            <a href="{{ settings.edocore.SiteConfig.impress }}">Impress</a>
+        {% endif %}
+        {% if settings.edocore.SiteConfig.privacy_policy %}
+            | <a href="{{ settings.edocore.SiteConfig.privacy_policy }}">Privacy Policy</a>
+        {% endif %}
+        {% if settings.edocore.SiteConfig.terms_of_use %}
+            | <a href="{{ settings.edocore.SiteConfig.terms_of_use }}">Terms of use</a>
+        {% endif %}
+    </p>
+</footer>

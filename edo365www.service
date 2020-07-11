@@ -1,0 +1,17 @@
+[Unit]
+Description=edo365 Django Gunicorn webserver.
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+User=www
+Group=www-data
+Type=simple
+Restart=always
+RestartSec=1
+WorkingDirectory=/home/sammy/myproject
+ExecStart=/usr/local/bin/pipenv run gunicorn --access-logfile - --workers 3 --bind unix:/var/www/www.edo365.de/edo365/edo365.sock edo365.wsgi:application
+
+
+[Install]
+WantedBy=multi-user.target

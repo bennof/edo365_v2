@@ -1,4 +1,5 @@
+{% load wagtailcore_tags %}
 <div class="code">
-    <code>{% include_block value.code %}</code>
-    <div class="caption">{% include_block value.description %}</div>
+    <code>{{ value.code }}</code>
+    <div class="caption">{{  value.description|richtext }}</div>
 </div>

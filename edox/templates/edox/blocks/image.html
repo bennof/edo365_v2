@@ -1,5 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
+
+{% image value.src width-600 as tmp_photo %}
 <figure>
-    {% image value.src  %}
-    <figcaption>{% include_block value.description %}</figcaption>  
+    <img src="{{ tmp_photo.url }}" alt="{{ tmp_photo.alt }}" />
+    <figcaption>{{ value.description|richtext }}</figcaption>  
 </figure>

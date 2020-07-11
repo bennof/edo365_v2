@@ -1,4 +1,5 @@
+{% load wagtailcore_tags %}
 <figure>
-    <canvas id="{% include_block value.id %}"></canvas>
-    <figcaption>{% include_block value.description %}</figcaption>  
+    <canvas id="{{ value.id }}"></canvas>
+    <figcaption>{{ value.description|richtext }}</figcaption>  
 </figure>

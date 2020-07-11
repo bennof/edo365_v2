@@ -17,8 +17,11 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/jsdox.js' %}"></script>
+
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/edo365.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -27,12 +30,11 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
+        {% include "edocore/menu.html" %}
 
         {% block content %}{% endblock %}
 
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/edo365.js' %}"></script>
-
+        {% include "edocore/footer.html" %}
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}

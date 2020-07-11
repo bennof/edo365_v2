@@ -101,7 +101,7 @@ class SiteConfig(BaseSetting):
 
     copyright = models.CharField(
         max_length=64,
-        default="MyWebPage")
+        default="2020 Me")
 
     contact = models.EmailField(
         max_length=64,
