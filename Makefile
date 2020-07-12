@@ -56,5 +56,5 @@ edo365/static/jsdox.js: edo365/js_src/node_modules
 	npm run build --prefix ./edo365/js_src/
 
 edo365/js_src/node_modules:
-	npm init --prefix ./edo365/js_src/
+	#npm init --prefix ./edo365/js_src/
 	npm install --prefix ./edo365/js_src/
