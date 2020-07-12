@@ -11,8 +11,15 @@ all: build
 # install
 install:  
 	chown -R www-data:www-data $(shell pwd)
-	./site.nginx.sh /etc/nginx/sites-available/edo365.nginx "www2.edo365.de www.edo365.de edo365.de"
+	# systemd
 	./systemd.service.sh /etc/systemd/system/edo365.service www-data www-data
+	systemctl start edo365
+	# nginx
+	./site.nginx.sh /etc/nginx/sites-available/edo365.nginx "www2.edo365.de www.edo365.de edo365.de"
+	ln -s /etc/nginx/sites-available/edo365.nginx /etc/nginx/sites-enabled/
+	nginx -t
+	systemctl restart nginx
+	
 
 	
 # run server
