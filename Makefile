@@ -9,21 +9,27 @@ all: build
 
 
 # install
-install:  
+install: /etc/systemd/system/edo365.service /etc/nginx/sites-available/edo365.nginx
 	chown -R www-data:www-data $(shell pwd)
-	# systemd
+	
+	
+
+	
+
+enable-ssl:
+	certbot --nginx -d www2.edo365.de -d www.edo365.de -d edo365.de
+
+# systemd
+/etc/systemd/system/edo365.service
 	./systemd.service.sh /etc/systemd/system/edo365.service www-data www-data
 	systemctl start edo365
-	# nginx
+
+# nginx	
+/etc/nginx/sites-available/edo365.nginx:
 	./site.nginx.sh /etc/nginx/sites-available/edo365.nginx "www2.edo365.de www.edo365.de edo365.de"
 	ln -s /etc/nginx/sites-available/edo365.nginx /etc/nginx/sites-enabled/
 	nginx -t
 	systemctl restart nginx
-
-enable-ssl:
-	certbot --nginx -d www2.edo365.de -d www.edo365.de -d edo365.de
-	
-
 	
 # run server
 run: build
