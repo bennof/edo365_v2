@@ -10,7 +10,7 @@ Type=simple
 Restart=always
 RestartSec=1
 WorkingDirectory=/home/sammy/myproject
-ExecStart=/usr/local/bin/pipenv run gunicorn --access-logfile - --workers 3 --bind unix:/var/www/www.edo365.de/edo365/edo365.sock edo365.wsgi:application
+ExecStart=/usr/local/bin/pipenv run gunicorn --access-logfile --workers 4 -b 127.0.0.1:8080 edo365.wsgi:application
 
 
 [Install]

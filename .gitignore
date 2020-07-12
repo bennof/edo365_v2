@@ -10,3 +10,5 @@ Pipfile.lock
 *.pyc
 secret.txt
 node_modules
+*/static/js/*
+*/static/css/*
