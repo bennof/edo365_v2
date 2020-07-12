@@ -16,8 +16,8 @@ KillMode=mixed
 TimeoutStopSec=5
 PrivateTmp=true
 WorkingDirectory=$(pwd)
-ExecStart=/usr/local/bin/pipenv run gunicorn  --workers 4 -b 127.0.0.1:8080 edo365.wsgi:application
-ExecReload=/bin/kill -s HUP $MAINPID
+ExecStart=/usr/local/bin/pipenv run gunicorn --access-logfile $(pwd)/gunicorn.log --workers 4 -b unix:$(pwd)/edo365/edo365.sock  edo365.wsgi:application
+ExecReload=/bin/kill -s HUP \$MAINPID
 
 
 [Install]

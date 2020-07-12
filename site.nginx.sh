@@ -2,7 +2,7 @@
 
 cat > $1 <<EOF
 upstream app_server {
-    server 127.0.0.1:8080;
+    server unix:$(pwd)/edo365/edo365.sock;
 }
 
 server {
@@ -24,9 +24,6 @@ server {
         proxy_set_header   X-Real-IP \$remote_addr;
         proxy_redirect off;
         proxy_pass http://app_server;
-
-        # include         uwsgi_params;
-        # uwsgi_pass      unix:$(pwd)/edo365/edo365.sock;
     }
 }
 EOF

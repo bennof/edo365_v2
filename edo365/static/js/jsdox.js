@@ -96,21 +96,287 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/core/file.js":
+/*!**************************!*\
+  !*** ./src/core/file.js ***!
+  \**************************/
+/*! exports provided: open, save */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "open", function() { return open; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "save", function() { return save; });
+/* Copyright (c) 2018-2020 Benjamin 'Benno' Falkner
+**
+** Permission is hereby granted, free of charge, to any person obtaining a copy
+** of this software and associated documentation files (the "Software"), to deal
+** in the Software without restriction, including without limitation the rights
+** to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+** copies of the Software, and to permit persons to whom the Software is
+** furnished to do so, subject to the following conditions:
+**
+** The above copyright notice and this permission notice shall be included in all
+** copies or substantial portions of the Software.
+**
+** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+** FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+** AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+** LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+** SOFTWARE.
+*/
+
+/** 
+* @module jsdox/file
+*/
+
+/**
+* read a file
+* @param {Function} Fun Callback function (State,Data)
+* @param {File} Filen a file object
+* @param {String} Type optional datatype
+*/
+function open(Fun, Filen, Type) {
+  var Reader = new FileReader();
+  Reader.cb = Fun;
+
+  Reader.onload = function (Event) {
+    this.cb(200, Event.target.result);
+  };
+
+  Reader.onerror = function (Event) {
+    this.cb(404, Event.target.error.code);
+  };
+
+  if (Type == "DataURL") Reader.readAsDataURL(Filen);else Reader.readAsText(Filen);
+}
+;
+/**
+* save file as download
+* @param Filen Filename
+* @param Mime  Mimetype
+* @param Data  data string or blob
+**/
+
+function save(Filen, Mime, Data) {
+  // Mime text/csv;charset=utf-8
+  var FileLink = document.createElement('a');
+  if (Mime.startsWith('text')) FileLink.setAttribute('href', 'data:' + Mime + ',' + encodeURIComponent(Data));else FileLink.setAttribute('href', 'data:' + Mime + ',' + btoa(Data));
+  FileLink.setAttribute('download', Filen);
+
+  if (document.createEvent) {
+    var Event = document.createEvent('MouseEvents');
+    Event.initEvent('click', true, true);
+    FileLink.dispatchEvent(Event);
+  } else {
+    FileLink.click();
+  }
+}
+
+/***/ }),
+
+/***/ "./src/core/tools.js":
+/*!***************************!*\
+  !*** ./src/core/tools.js ***!
+  \***************************/
+/*! exports provided: map */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "map", function() { return map; });
+/* Copyright (c) 2018-2020 Benjamin 'Benno' Falkner
+**
+** Permission is hereby granted, free of charge, to any person obtaining a copy
+** of this software and associated documentation files (the "Software"), to deal
+** in the Software without restriction, including without limitation the rights
+** to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+** copies of the Software, and to permit persons to whom the Software is
+** furnished to do so, subject to the following conditions:
+**
+** The above copyright notice and this permission notice shall be included in all
+** copies or substantial portions of the Software.
+**
+** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+** FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+** AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+** LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+** SOFTWARE.
+*/
+function map(fun, map) {
+  var r = {},
+      i,
+      keys = Object.keys(map);
+
+  for (i = 0; i < keys.length; i++) {
+    r[keys[i]] = fun(keys[i], map[keys[i]]);
+  }
+
+  return r;
+}
+
+/***/ }),
+
+/***/ "./src/core/url.js":
+/*!*************************!*\
+  !*** ./src/core/url.js ***!
+  \*************************/
+/*! exports provided: get_header, get_hash, get_query, encode_base64, decode_base64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get_header", function() { return get_header; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get_hash", function() { return get_hash; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get_query", function() { return get_query; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "encode_base64", function() { return encode_base64; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decode_base64", function() { return decode_base64; });
+/* Copyright (c) 2018-2020 Benjamin 'Benno' Falkner
+**
+** Permission is hereby granted, free of charge, to any person obtaining a copy
+** of this software and associated documentation files (the "Software"), to deal
+** in the Software without restriction, including without limitation the rights
+** to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+** copies of the Software, and to permit persons to whom the Software is
+** furnished to do so, subject to the following conditions:
+**
+** The above copyright notice and this permission notice shall be included in all
+** copies or substantial portions of the Software.
+**
+** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+** FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+** AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+** LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+** SOFTWARE.
+*/
+
+/** 
+* @module jsdox/url
+*/
+
+/**
+ * Scan and return header fields of XHTTP requests
+ * @param {*} Res a Xhttp response object
+ * @returns a map of header fields
+ */
+function get_header(res) {
+  var i,
+      elem,
+      key,
+      value,
+      r = {},
+      hl = Xhttp.getAllResponseHeaders().trim().split(/[\r\n]+/);
+
+  for (i = 0; i < hl.length; i++) {
+    elem = hl[i].split(': ');
+    key = elem.shift();
+    value = elem.join(': ');
+    r[key] = value;
+  }
+
+  return r;
+}
+/**
+ * easier access to url encoded hash fields
+ * @param {*} URL a url like window.location
+ * @returns a map of hash values in url 
+ */
+
+function get_hash(url) {
+  var i,
+      r1,
+      res = {},
+      hash = url.hash.substr(1).split("&");
+
+  for (i = 0; i < hash.length; i++) {
+    r1 = hash[i].split("=");
+    res[r1[0]] = decodeURIComponent(r1[1]) || r1[0];
+  }
+
+  return res;
+}
+/**
+ * easier access to url encoded query fields
+ * @param {*} URL a url like window.location
+ * @returns a map of query values in url 
+ */
+
+function get_query(url) {
+  var i,
+      r1,
+      res = {},
+      query = url.search.substr(1).split("&");
+
+  for (i = 0; i < query.length; i++) {
+    r1 = query[i].split("=");
+    res[r1[0]] = r1[1] || r1[0];
+  }
+
+  return res;
+}
+function encode_base64(input) {
+  var json = JSON.stringify(input);
+  var base64 = btoa(json).replace(/=+$/gm, '');
+  return base64.replace(/\+/g, '-').replace(/\//g, '_');
+}
+function decode_base64(input) {
+  var base64 = input.replace(/-/g, '+').replace(/_/g, '/');
+  var json = atob(base64);
+  return JSON.parse(json);
+}
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! exports provided: Table, TableView, version */
+/*! exports provided: url, file, o365, Table, TableView, version */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return version; });
-/* harmony import */ var _table_table__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./table/table */ "./src/table/table.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Table", function() { return _table_table__WEBPACK_IMPORTED_MODULE_0__["Table"]; });
+/* harmony import */ var _core_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/url */ "./src/core/url.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "url", function() { return _core_url__WEBPACK_IMPORTED_MODULE_0__; });
+/* harmony import */ var _core_file__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/file */ "./src/core/file.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "file", function() { return _core_file__WEBPACK_IMPORTED_MODULE_1__; });
+/* harmony import */ var _o365_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./o365/index */ "./src/o365/index.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "o365", function() { return _o365_index__WEBPACK_IMPORTED_MODULE_2__; });
+/* harmony import */ var _table_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./table/table */ "./src/table/table.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Table", function() { return _table_table__WEBPACK_IMPORTED_MODULE_3__["Table"]; });
 
-/* harmony import */ var _table_table_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./table/table_view */ "./src/table/table_view.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TableView", function() { return _table_table_view__WEBPACK_IMPORTED_MODULE_1__["TableView"]; });
+/* harmony import */ var _table_table_view__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./table/table_view */ "./src/table/table_view.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TableView", function() { return _table_table_view__WEBPACK_IMPORTED_MODULE_4__["TableView"]; });
+
+/* Copyright (c) 2018-2020 Benjamin 'Benno' Falkner
+**
+** Permission is hereby granted, free of charge, to any person obtaining a copy
+** of this software and associated documentation files (the "Software"), to deal
+** in the Software without restriction, including without limitation the rights
+** to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+** copies of the Software, and to permit persons to whom the Software is
+** furnished to do so, subject to the following conditions:
+**
+** The above copyright notice and this permission notice shall be included in all
+** copies or substantial portions of the Software.
+**
+** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+** FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+** AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+** LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+** SOFTWARE.
+*/
+
+
 
 
 
@@ -118,6 +384,391 @@ __webpack_require__.r(__webpack_exports__);
 function version() {
   return "JSDoX (wagtail): v0.0.1";
 }
+
+/***/ }),
+
+/***/ "./src/o365/conn.js":
+/*!**************************!*\
+  !*** ./src/o365/conn.js ***!
+  \**************************/
+/*! exports provided: Connection */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Connection", function() { return Connection; });
+/* harmony import */ var _core_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/url */ "./src/core/url.js");
+/* harmony import */ var _core_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/tools */ "./src/core/tools.js");
+/* Copyright (c) 2018-2020 Benjamin 'Benno' Falkner
+**
+** Permission is hereby granted, free of charge, to any person obtaining a copy
+** of this software and associated documentation files (the "Software"), to deal
+** in the Software without restriction, including without limitation the rights
+** to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+** copies of the Software, and to permit persons to whom the Software is
+** furnished to do so, subject to the following conditions:
+**
+** The above copyright notice and this permission notice shall be included in all
+** copies or substantial portions of the Software.
+**
+** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+** FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+** AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+** LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+** SOFTWARE.
+*/
+
+ // used constants
+
+const CONN_CFG = "_conn_cfg";
+const CONN_STATE = "_conn_state";
+const REFRESH_REQ = "_refresh_request";
+const LOCATION = "_location";
+/**
+ * Office 365 Connection Class
+ */
+
+class Connection {
+  /**
+   * constructor for a connection
+   * @param {*} name name of the connection 
+   * @param {*} cfg a config object (should be undefined)
+   */
+  constructor(name, cfg) {
+    // set name of the connection
+    this.name = name;
+    var hash = Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["get_hash"])(window.location); //store all values passed as hash (not seen by server)
+    // try to get a config
+
+    if (cfg) {
+      // config is passed directly (unsecure)
+      this.config = cfg;
+      this.save_config(); // safe data for session
+    } else if (hash[this.name + CONN_CFG]) {
+      // decode config from hash
+      this.config = Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["decode_base64"])(hash[this.name + CONN_CFG]);
+      this.save_config(); // safe data for session
+    } else if ((cfg = sessionStorage.getItem(this.name + CONN_CFG)) != null) {
+      // get data from session
+      this.config = JSON.parse(cfg);
+    } else if ((cfg = localStorage.getItem(this.name + CONN_CFG)) != null) {
+      // get data from store
+      this.config = JSON.parse(cfg);
+      this.save_config(); // safe data for session
+    } else {
+      // use empty setting
+      this.config = {
+        tenant: "",
+        login: {
+          link: "",
+          params: {
+            client_id: "",
+            response_type: "",
+            redirect_uri: "",
+            scope: "",
+            nonce: "",
+            state: ""
+          }
+        },
+        logout: {
+          link: "",
+          params: {}
+        }
+      };
+      this.save_config(); // safe data for session
+    } // checking for login information
+
+
+    var state = localStorage.getItem(this.name + CONN_STATE) || []; // state info from url hash overrides saved state
+
+    this.access_token = hash.access_token || state.access_token || null;
+    this.refresh_token = hash.refresh_token || state.refresh_token || null;
+    this.id = state.id || null;
+
+    if (hash.id_token) {
+      this.id = base64UrlDecode(hash.id_token.split('.')[1]); // JWT data element
+    } // a refresh is send
+
+
+    state = Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["decode_base64"])(hash.state);
+
+    if (state.refresh == true) {
+      var url = new URL(window.location);
+      url.hash = '';
+
+      if (hash.error) {
+        window.parent.postMessage({
+          state: hash.error,
+          desc: hash.error_description
+        }, url);
+      } else {
+        window.parent.postMessage({
+          state: 'ok',
+          access_token: params.access_token
+        }, url);
+      }
+
+      return;
+    } // error 
+
+
+    if (hash.error) {
+      alert(hash.error + '\n' + hash.error_description);
+      return;
+    } // setup message handler for refresh
+
+
+    window.addEventListener('message', function (event) {
+      if (event.data.state) {
+        if (event.data.state === 'ok') {
+          this.access_token = event.data.access_token;
+          this.save_state();
+        } else {
+          alert(event.data.state + '\n' + event.data.error_description);
+        }
+
+        document.body.removeChild(document.getElementById(this.name + "_refresh"));
+      }
+    }.bind(this), false);
+    this.save_state(); // save state
+
+    this.requests = []; // store request, for serialisation
+
+    this.req = false; // check for state arguments
+
+    if (state.location && window.location.pathname != state.location) {
+      window.location.pathname = state.location;
+    }
+  }
+  /**
+   * open a connection / login
+   */
+
+
+  open() {
+    if (!this.config.login.link) {
+      alert("Incomplet connection config - please load or create a configuration");
+      return;
+    } // build link
+
+
+    var link = this.config.login.link;
+
+    for (var param in this.config.login.params) {
+      link += encodeURIComponent(param) + "=" + encodeURIComponent(this.config.login.params[param]) + "&";
+    }
+
+    link += encodeURIComponent(state) + "=" + Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["encode_base64"])({
+      location: window.location.pathname
+    }) + "&";
+    window.location.href = link;
+  }
+  /**
+   * close connection / logout
+   */
+
+
+  close() {
+    sessionStorage.removeItem(this.name + CONN_STATE); // delete session storage
+    // unset all values
+
+    this.access_token = null;
+    this.refresh_token = null;
+    this.id = null; // build link
+
+    var link = this.config.logout.link;
+
+    for (var param in this.config.logout.params) {
+      link += encodeURIComponent(param) + "=" + encodeURIComponent(this.config.logout.params[param]) + "&";
+    }
+
+    window.location.href = link;
+  }
+  /**
+   * refresh connection
+   */
+
+
+  refresh() {
+    // build link
+    var link = this.config.login.link;
+
+    for (var param in this.config.login.param) {
+      link += encodeURIComponent(param) + "=" + encodeURIComponent(this.config.login.param[param]) + "&";
+    }
+
+    link += encodeURIComponent('prompt') + "=" //avoid login prompt
+    + encodeURIComponent('none') + "&";
+    if (this.id.email) link += encodeURIComponent('login_hint') + "=" + encodeURIComponent(this.id.email) + "&";
+    link += encodeURIComponent(state) + "=" + Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["encode_base64"])({
+      refresh: true,
+      location: window.location.pathname
+    }) + "&";
+    if (document.getElementById(this.name + "_refesh")) return; // avoid multiple refreshs
+    // create hidden iframe
+
+    var iframe = document.createElement('iframe');
+    iframe.id = this.name + "_refesh";
+    iframe.style.display = "none";
+    iframe.src = link;
+    document.body.appendChild(iframe);
+  }
+  /**
+   * perform a request async
+   * @param {*} fun 
+   * @param {*} method 
+   * @param {*} url 
+   * @param {*} body
+   * @param {*} param 
+   */
+
+
+  request(fun, method, url, body, param) {
+    this.requests.push({
+      fun: fun,
+      method: method,
+      url: url,
+      body: body,
+      param: param
+    });
+    this.process_requests();
+  }
+
+  json_request(fun, method, url, body, param) {
+    this.requests.push({
+      fun: json_req_handle.bind({
+        conn: this,
+        fun: fun
+      }),
+      method: method,
+      url: url,
+      body: body,
+      param: param
+    });
+    this.process_requests();
+  }
+  /**
+   * perform requests
+   */
+
+
+  process_requests() {
+    //check for open requests
+    if (this.req) return;
+    var r = this.requests.shift();
+
+    if (r) {
+      this.req = true;
+      var req = new XMLHttpRequest();
+      req.open(r.method, r.url, true);
+      req.setRequestHeader("Authorization", "Bearer " + this.access_token);
+      Object(_core_tools__WEBPACK_IMPORTED_MODULE_1__["map"])(req.setRequestHeader.bind(req), r.param);
+      req.conn = this;
+      req.fun = r.fun;
+      req.body = r.body;
+
+      req.onreadystatechange = function () {
+        if (req.readyState === 4) {
+          //missing handle refresh error
+          var header = Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["get_header"])(req);
+          req.fun(req.status, req.response, header);
+          req.conn.req = false;
+          req.conn.process_requests();
+        }
+      };
+
+      if (r.body) req.send(r.body);else req.send();
+      return req;
+    }
+  }
+  /**
+   * save config 
+   * @param {*} target to save to (default is sessionStorage)
+   */
+
+
+  save_config(target = sessionStorage) {
+    target.setItem(this.name + CONN_CFG, JSON.stringify(this.config));
+  }
+  /**
+   * save state
+   * @param {*} target to save to (default is sessionStorage)
+   */
+
+
+  save_state(target = sessionStorage) {
+    target.setItem(this.name + CONN_STATE, JSON.stringify({
+      access_token: this.access_token,
+      refresh_token: this.refresh_token,
+      id: this.id
+    }));
+  }
+  /**
+   * convert config to a url hash element
+   */
+
+
+  config_to_url() {
+    return this.name + CONN_CFG + "=" + base64UrlEncode(this.config);
+  }
+
+}
+
+function json_req_handle(state, body, header) {
+  if (state === 200) {
+    var json = JSON.parse(body);
+    this.data = this.data ? this.data.concat(json.value) : json.value;
+
+    if (json["@odata.nextLink"]) {
+      // if there is more data
+      this.conn.request(json_req_handle.bind(this), 'GET', json["@odata.nextLink"], null, null);
+    } else {
+      //transfer complete
+      this.fun(state, this.data, header);
+    }
+  } else {
+    this.fun(state, this.data ? this.data : [], header);
+  }
+}
+
+/***/ }),
+
+/***/ "./src/o365/index.js":
+/*!***************************!*\
+  !*** ./src/o365/index.js ***!
+  \***************************/
+/*! exports provided: Connection */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _conn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./conn */ "./src/o365/conn.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Connection", function() { return _conn__WEBPACK_IMPORTED_MODULE_0__["Connection"]; });
+
+/* Copyright (c) 2018-2020 Benjamin 'Benno' Falkner
+**
+** Permission is hereby granted, free of charge, to any person obtaining a copy
+** of this software and associated documentation files (the "Software"), to deal
+** in the Software without restriction, including without limitation the rights
+** to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+** copies of the Software, and to permit persons to whom the Software is
+** furnished to do so, subject to the following conditions:
+**
+** The above copyright notice and this permission notice shall be included in all
+** copies or substantial portions of the Software.
+**
+** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+** IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+** FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+** AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+** LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+** SOFTWARE.
+*/
+
+
 
 /***/ }),
 
@@ -648,6 +1299,34 @@ class Table {
     }
 
     return text;
+  }
+
+  open_csv(fun, file) {
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+      this.read_csv(event.target.result, ';');
+      fun();
+    };
+
+    reader.onerror = function (event) {
+      alert(event.target.error);
+    };
+
+    reader.readAsText(file);
+  }
+
+  save_csv() {
+    var file_link = document.createElement('a');
+    file_link.setAttribute('href', 'data: text/csv,' + encodeURIComponent(this.write_csv(';')));
+
+    if (document.createEvent) {
+      var event = document.createEvent('MouseEvents');
+      event.initEvent('click', true, true);
+      file_link.dispatchEvent(event);
+    } else {
+      file_link.click();
+    }
   }
 
 }

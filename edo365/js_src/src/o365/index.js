@@ -19,26 +19,9 @@
 ** SOFTWARE.
 */
 
-import * as url from './core/url';
-import * as file from './core/file';
-
-import * as o365 from './o365/index';
-
-import {Table} from './table/table';
-import {TableView} from './table/table_view';
+import { Connection } from './conn';
 
 
 export {
-    // NameSpaces
-    url,
-    file,
-    o365,
-
-    // Objects
-    Table,
-    TableView
+    Connection
 }
-
-export function version(){
-    return "JSDoX (wagtail): v0.0.1"
-} 

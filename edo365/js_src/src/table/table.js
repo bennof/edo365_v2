@@ -421,6 +421,30 @@ export class Table {
         }
         return text;
     }
+
+    open_csv(fun, file) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            this.read_csv(event.target.result, ';')
+            fun();
+        };
+        reader.onerror = function(event) {
+            alert(event.target.error);
+        };
+        reader.readAsText(file);
+    }
+
+    save_csv(){
+        var file_link = document.createElement('a');
+        file_link.setAttribute('href', 'data: text/csv,' + encodeURIComponent(this.write_csv(';')));
+        if (document.createEvent) {
+            var event = document.createEvent('MouseEvents');
+            event.initEvent('click', true, true);
+            file_link.dispatchEvent(event);
+        } else {
+            file_link.click();
+        }
+    }
 };
 
 
