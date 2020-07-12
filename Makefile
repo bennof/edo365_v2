@@ -20,7 +20,7 @@ enable-ssl:
 	certbot --nginx -d www2.edo365.de -d www.edo365.de -d edo365.de
 
 # systemd
-/etc/systemd/system/edo365.service
+/etc/systemd/system/edo365.service:
 	./systemd.service.sh /etc/systemd/system/edo365.service www-data www-data
 	systemctl start edo365
 
