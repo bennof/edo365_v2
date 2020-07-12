@@ -37,14 +37,15 @@ node_dev:
 node_build:
 	npm run build --prefix ./edo365/js_src/
 
+# create superuser account
+superuser:
+	pipenv run python manage.py createsuperuser 
+
 # build all
 build: init
 	pipenv run python manage.py makemigrations
 	pipenv run python manage.py migrate
-	pipenv run python manage.py createsuperuser || echo "!!!skipped!!!"
 	pipenv run python manage.py collectstatic
-	
-
 
 # prepare
 init: .venv edo365/static/jsdox.js
