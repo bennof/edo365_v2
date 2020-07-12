@@ -26,6 +26,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     #'search',
 
+    'edouser',
     'edocore',
     #'edoblog',
     'edox',
@@ -104,7 +105,7 @@ DATABASES = {
 }
 
 # Change Usermodel
-AUTH_USER_MODEL = 'edocore.User'
+AUTH_USER_MODEL = 'edouser.User'
 
 
 # Password validation

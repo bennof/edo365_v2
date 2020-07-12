@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+
 from django.db import models
 
 from wagtail.contrib.settings.models import BaseSetting, register_setting
@@ -12,9 +12,7 @@ class RobotsTXT(BaseSetting):
     pass
 
 
-# override user model (always useful)
-class User(AbstractUser): 
-    pass
+
 
 
 
