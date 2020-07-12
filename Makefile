@@ -35,7 +35,7 @@ node_build:
 
 # build all
 build: init
-	pipenv run python manage.py makemigration
+	pipenv run python manage.py makemigrations
 	pipenv run python manage.py createsuperuser
 	python manage.py collectstatic
 	pipenv run python manage.py migrate

@@ -12,3 +12,4 @@ secret.txt
 node_modules
 */static/js/*
 */static/css/*
+package-lock.json
