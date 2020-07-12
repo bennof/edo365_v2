@@ -20,7 +20,7 @@ install:
 	nginx -t
 	systemctl restart nginx
 
-enable-ssh:
+enable-ssl:
 	certbot --nginx -d www2.edo365.de -d www.edo365.de -d edo365.de
 	
 

@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 DEFAULT_PORT = "8080"
-ALLOWED_HOSTS = ['*.edo365.de','localhost'] 
+ALLOWED_HOSTS = ['*.edo365.de','localhost','127.0.0.1'] 
 ADMINS = [('Benno','benno.falkner@gmail.com')]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
