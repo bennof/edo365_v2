@@ -10,6 +10,10 @@ all: build
 
 # install
 install:  
+	chown -R www-data:www-data $(pwd)
+	./site.nginx.sh /etc/nginx/sites-available/edo365.nginx "www2.edo365.de www.edo365.de edo365.de"
+	./systemd.service.sh /etc/systemd/system/edo365.service www-data www-data
+
 	
 # run server
 run: build
@@ -36,9 +40,10 @@ node_build:
 # build all
 build: init
 	pipenv run python manage.py makemigrations
-	pipenv run python manage.py createsuperuser
-	python manage.py collectstatic
 	pipenv run python manage.py migrate
+	pipenv run python manage.py createsuperuser
+	pipenv run python manage.py collectstatic
+	
 
 
 # prepare
@@ -57,4 +62,4 @@ edo365/static/jsdox.js: edo365/js_src/node_modules
 
 edo365/js_src/node_modules:
 	#npm init --prefix ./edo365/js_src/
-	npm install --prefix ./edo365/js_src/
+	npm install --prefix ./edo365/js_src/ --unsafe-perm node-sass
