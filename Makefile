@@ -19,6 +19,9 @@ install:
 	ln -s /etc/nginx/sites-available/edo365.nginx /etc/nginx/sites-enabled/
 	nginx -t
 	systemctl restart nginx
+
+enable-ssh:
+	certbot --nginx -d www2.edo365.de -d www.edo365.de -d edo365.de
 	
 
 	
