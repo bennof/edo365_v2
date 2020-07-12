@@ -10,7 +10,7 @@ all: build
 
 # install
 install:  
-	chown -R www-data:www-data $(pwd)
+	chown -R www-data:www-data $(shell pwd)
 	./site.nginx.sh /etc/nginx/sites-available/edo365.nginx "www2.edo365.de www.edo365.de edo365.de"
 	./systemd.service.sh /etc/systemd/system/edo365.service www-data www-data
 
