@@ -37,6 +37,7 @@ class EDoX(Page):
     # body = EDoxField([])
     body = StreamField([
         ('text', wt_blocks.RichTextBlock()),
+        ('raw', wt_blocks.RawHTMLBlock()),
         ('code', blocks.CodeBlock()),
         ('image', blocks.ImageBlock()),
         ('plot', blocks.PlotBlock()),

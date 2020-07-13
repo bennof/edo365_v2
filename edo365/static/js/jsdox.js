@@ -138,19 +138,19 @@ __webpack_require__.r(__webpack_exports__);
 * @param {File} Filen a file object
 * @param {String} Type optional datatype
 */
-function open(Fun, Filen, Type) {
-  var Reader = new FileReader();
-  Reader.cb = Fun;
+function open(fun, filen, type) {
+  var reader = new FileReader();
+  reader.cb = fun;
 
-  Reader.onload = function (Event) {
-    this.cb(200, Event.target.result);
+  reader.onload = function (event) {
+    this.cb(200, event.target.result);
   };
 
-  Reader.onerror = function (Event) {
-    this.cb(404, Event.target.error.code);
+  reader.onerror = function (event) {
+    this.cb(404, event.target.error.code);
   };
 
-  if (Type == "DataURL") Reader.readAsDataURL(Filen);else Reader.readAsText(Filen);
+  if (type == "DataURL") reader.readAsDataURL(filen);else reader.readAsText(filen);
 }
 ;
 /**
@@ -399,6 +399,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Connection", function() { return Connection; });
 /* harmony import */ var _core_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/url */ "./src/core/url.js");
 /* harmony import */ var _core_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core/tools */ "./src/core/tools.js");
+/* harmony import */ var _core_file__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/file */ "./src/core/file.js");
 /* Copyright (c) 2018-2020 Benjamin 'Benno' Falkner
 **
 ** Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -420,6 +421,7 @@ __webpack_require__.r(__webpack_exports__);
 ** SOFTWARE.
 */
 
+
  // used constants
 
 const CONN_CFG = "_conn_cfg";
@@ -436,7 +438,7 @@ class Connection {
    * @param {*} name name of the connection 
    * @param {*} cfg a config object (should be undefined)
    */
-  constructor(name, cfg) {
+  constructor(name, setup, cfg) {
     // set name of the connection
     this.name = name;
     var hash = Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["get_hash"])(window.location); //store all values passed as hash (not seen by server)
@@ -488,29 +490,33 @@ class Connection {
     this.id = state.id || null;
 
     if (hash.id_token) {
-      this.id = base64UrlDecode(hash.id_token.split('.')[1]); // JWT data element
-    } // a refresh is send
+      this.id = Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["decode_base64"])(hash.id_token.split('.')[1]); // JWT data element
+    }
 
+    if (hash.state) {
+      // a refresh is send
+      state = Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["decode_base64"])(hash.state);
 
-    state = Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["decode_base64"])(hash.state);
+      if (state.refresh && state.refresh == true) {
+        var url = new URL(window.location);
+        url.hash = '';
 
-    if (state.refresh == true) {
-      var url = new URL(window.location);
-      url.hash = '';
+        if (hash.error) {
+          window.parent.postMessage({
+            state: hash.error,
+            desc: hash.error_description
+          }, url);
+        } else {
+          window.parent.postMessage({
+            state: 'ok',
+            access_token: params.access_token
+          }, url);
+        }
 
-      if (hash.error) {
-        window.parent.postMessage({
-          state: hash.error,
-          desc: hash.error_description
-        }, url);
-      } else {
-        window.parent.postMessage({
-          state: 'ok',
-          access_token: params.access_token
-        }, url);
+        return;
       }
-
-      return;
+    } else {
+      state = {};
     } // error 
 
 
@@ -541,6 +547,12 @@ class Connection {
     if (state.location && window.location.pathname != state.location) {
       window.location.pathname = state.location;
     }
+
+    if (setup) {
+      if (setup.logged_in && this.access_token) {
+        setup.logged_in(this);
+      }
+    }
   }
   /**
    * open a connection / login
@@ -560,7 +572,7 @@ class Connection {
       link += encodeURIComponent(param) + "=" + encodeURIComponent(this.config.login.params[param]) + "&";
     }
 
-    link += encodeURIComponent(state) + "=" + Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["encode_base64"])({
+    link += encodeURIComponent("state") + "=" + Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["encode_base64"])({
       location: window.location.pathname
     }) + "&";
     window.location.href = link;
@@ -712,6 +724,35 @@ class Connection {
 
   config_to_url() {
     return this.name + CONN_CFG + "=" + base64UrlEncode(this.config);
+  }
+
+  load_json_file(title) {
+    if (document.getElementById(this.name + '_open_dialog')) return;
+    var box = document.createElement('div');
+    box.id = this.name + '_open_dialog';
+    box.classList.add('prompt');
+    var header = document.createElement('h1');
+    header.innerHTML = title;
+    box.appendChild(header);
+    var input = document.createElement('input');
+    input.type = 'file';
+    box.appendChild(input);
+    var conn = this;
+
+    input.onchange = function () {
+      console.log('change');
+      Object(_core_file__WEBPACK_IMPORTED_MODULE_2__["open"])(function (state, cfg) {
+        if (state == 200) {
+          this.config = JSON.parse(cfg);
+          this.save_config();
+        } else {
+          alert('ERRROR: ' + state + '\n' + cfg);
+        }
+      }.bind(conn), this.files[0]);
+      document.body.removeChild(box);
+    };
+
+    document.body.appendChild(box);
   }
 
 }

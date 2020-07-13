@@ -11,13 +11,6 @@ all: build
 # install
 install: /etc/systemd/system/edo365.service /etc/nginx/sites-available/edo365.nginx
 	chown -R www-data:www-data $(shell pwd)
-	
-	
-
-	
-
-enable-ssl:
-	certbot --nginx -d www2.edo365.de -d www.edo365.de -d edo365.de
 
 # systemd
 /etc/systemd/system/edo365.service:
@@ -43,19 +36,16 @@ rundev:
 	pipenv run python manage.py runserver
 
 # node js stuff
-node_init:
-	npm init --prefix ./edo365/js_src/
-	npm install --prefix ./edo365/js_src/
-
 node_dev:
 	npm run dev --prefix ./edo365/js_src/ 
-	
-node_build:
-	npm run build --prefix ./edo365/js_src/
 
 # create superuser account
 superuser:
 	pipenv run python manage.py createsuperuser 
+
+# enable ssl
+enable-ssl:
+	certbot --nginx -d www2.edo365.de -d www.edo365.de -d edo365.de
 
 # build all
 build: init

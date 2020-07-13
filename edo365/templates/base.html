@@ -19,6 +19,10 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/jsdox.js' %}"></script>
+        <script>
+            
+        </script>
+
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
@@ -38,5 +42,16 @@
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
+        <script>
+            // Control Page
+            // Init
+            var conn = new jsdox.o365.Connection("O365_SCHOOL",{
+                logged_in: function(c){
+                    var elem = document.getElementById("login_link");
+                    elem.innerHTML = c.id.name + " (logout)" || "logout";
+                    elem.href = "javascript:conn.close()";
+                }
+            });
+        </script>
     </body>
 </html>

@@ -21,6 +21,7 @@
 
 import {get_hash, decode_base64, encode_base64, get_header} from '../core/url'
 import {map} from '../core/tools';
+import {open} from '../core/file';
 
 // used constants
 const  CONN_CFG = "_conn_cfg";
@@ -38,7 +39,7 @@ export class Connection {
      * @param {*} name name of the connection 
      * @param {*} cfg a config object (should be undefined)
      */
-    constructor(name, cfg){
+    constructor(name, setup, cfg){
         // set name of the connection
         this.name = name;
 
@@ -86,20 +87,25 @@ export class Connection {
         this.refresh_token = hash.refresh_token || state.refresh_token || null;
         this.id = state.id || null;
         if (hash.id_token){
-            this.id = base64UrlDecode(hash.id_token.split('.')[1]); // JWT data element
+            this.id = decode_base64(hash.id_token.split('.')[1]); // JWT data element
         }
 
-        // a refresh is send
-        state = decode_base64(hash.state);
-        if (state.refresh == true){
-            var url = new URL(window.location);
-            url.hash='';
-            if (hash.error) {
-                window.parent.postMessage({state: hash.error, desc: hash.error_description},url);
-            } else {
-                window.parent.postMessage({state: 'ok', access_token: params.access_token},url);
+
+        if (hash.state){
+            // a refresh is send
+            state = decode_base64(hash.state);
+            if (state.refresh && state.refresh == true){
+                var url = new URL(window.location);
+                url.hash='';
+                if (hash.error) {
+                    window.parent.postMessage({state: hash.error, desc: hash.error_description},url);
+                } else {
+                    window.parent.postMessage({state: 'ok', access_token: params.access_token},url);
+                }
+                return;
             }
-            return;
+        } else {
+            state = {};
         }
 
         // error 
@@ -129,6 +135,12 @@ export class Connection {
         if (state.location && window.location.pathname != state.location) {
             window.location.pathname = state.location;
         }
+
+        if(setup){
+            if(setup.logged_in && this.access_token){
+                setup.logged_in(this);
+            }
+        }
     }
 
     /**
@@ -145,7 +157,7 @@ export class Connection {
             link += encodeURIComponent(param)+"="
                 +encodeURIComponent(this.config.login.params[param])+"&";
         }
-        link += encodeURIComponent(state)+"="
+        link += encodeURIComponent("state")+"="
                 +encode_base64({location: window.location.pathname})+"&";
 
         window.location.href = link;
@@ -288,6 +300,33 @@ export class Connection {
         return this.name+CONN_CFG+"="+base64UrlEncode(this.config);
     }
 
+    load_json_file(title){
+        if(document.getElementById(this.name+'_open_dialog'))
+            return;
+        var box = document.createElement('div');
+        box.id = this.name+'_open_dialog';
+        box.classList.add('prompt');
+        var header = document.createElement('h1');
+        header.innerHTML = title;
+        box.appendChild(header);
+        var input = document.createElement('input');
+        input.type = 'file';
+        box.appendChild(input);
+        var conn = this;
+        input.onchange = function(){
+            console.log('change')
+            open(function(state,cfg){
+                if(state==200){
+                    this.config = JSON.parse(cfg);
+                    this.save_config();
+                } else {
+                    alert('ERRROR: '+ state + '\n' + cfg)
+                }
+            }.bind(conn), this.files[0]);
+            document.body.removeChild(box);
+        }
+        document.body.appendChild(box);
+    }
 }
 
 

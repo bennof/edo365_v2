@@ -29,20 +29,21 @@
 * @param {File} Filen a file object
 * @param {String} Type optional datatype
 */
-export function open(Fun,Filen,Type){
-    var Reader = new FileReader();
-    Reader.cb = Fun;
-    Reader.onload = function(Event) {
-        this.cb(200,Event.target.result);
+export function open(fun,filen,type){
+    var reader = new FileReader();
+    reader.cb = fun;
+    reader.onload = function(event) {
+        this.cb(200,event.target.result);
     };
-    Reader.onerror = function(Event) {
-        this.cb(404,Event.target.error.code);
+    reader.onerror = function(event) {
+        this.cb(404,event.target.error.code);
     };
-    if(Type == "DataURL")
-        Reader.readAsDataURL(Filen);
+    if(type == "DataURL")
+        reader.readAsDataURL(filen);
     else
-        Reader.readAsText(Filen);
+        reader.readAsText(filen);
 };
+
 
 /**
 * save file as download
@@ -66,3 +67,4 @@ export function save(Filen, Mime, Data) { // Mime text/csv;charset=utf-8
         FileLink.click();
     }
 }
+

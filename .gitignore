@@ -13,3 +13,5 @@ node_modules
 */static/js/*
 */static/css/*
 package-lock.json
+*.map
+priv/*

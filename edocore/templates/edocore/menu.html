@@ -37,6 +37,9 @@
             </button>
             <input type="text" placeholder="Search.." name="query" value="{{ search_query }}">
         </form></li>
+        <li>
+            <a id="login_link" href="javascript:conn.open()">Login</a>
+        </li>
         {% for item in navigation.menu_items.all %}
             <li>
                 <a href="{{ item.link }}" 
