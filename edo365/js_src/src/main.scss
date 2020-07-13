@@ -221,6 +221,14 @@ article {
     margin-top: $header_height;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+    caption {
+        font-size: smaller;
+        font-family: 'Neue Helvetica', Helvetica, sans-serif;
+    }
+}
 
 footer {
     font-family: 'Neue Helvetica', Helvetica, sans-serif;

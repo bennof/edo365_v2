@@ -163,6 +163,13 @@ article {
 .has-menubar {
   margin-top: 40px; }
 
+table {
+  border-collapse: collapse;
+  width: 100%; }
+  table caption {
+    font-size: smaller;
+    font-family: 'Neue Helvetica', Helvetica, sans-serif; }
+
 footer {
   font-family: 'Neue Helvetica', Helvetica, sans-serif;
   color: grey;
