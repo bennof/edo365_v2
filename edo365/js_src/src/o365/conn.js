@@ -21,7 +21,7 @@
 
 import {get_hash, decode_base64, encode_base64, get_header} from '../core/url'
 import {map} from '../core/tools';
-import {open} from '../core/file';
+import {open, save} from '../core/file';
 
 // used constants
 const  CONN_CFG = "_conn_cfg";
@@ -302,7 +302,19 @@ export class Connection {
         return this.name+CONN_CFG+"="+encode_base64(this.config);
     }
 
-    load_json_file(title){
+    show_config_link(){
+        var url = new URL(window.location.href)
+        url.hash='#'+conn.config_to_url();
+        alert(url.href);
+    }
+
+
+    save_json_config_file(name) {
+        save(name,'application/json',JSON.stringify(this.config));
+    }
+
+
+    load_json_config_file(title){
         if(document.getElementById(this.name+'_open_dialog'))
             return;
         var box = document.createElement('div');
@@ -328,6 +340,8 @@ export class Connection {
         }
         document.body.appendChild(box);
     }
+
+
 }
 
 

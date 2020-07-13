@@ -728,7 +728,17 @@ class Connection {
     return this.name + CONN_CFG + "=" + Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["encode_base64"])(this.config);
   }
 
-  load_json_file(title) {
+  show_config_link() {
+    var url = new URL(window.location.href);
+    url.hash = '#' + conn.config_to_url();
+    alert(url.href);
+  }
+
+  save_json_config_file(name) {
+    Object(_core_file__WEBPACK_IMPORTED_MODULE_2__["save"])(name, 'application/json', JSON.stringify(this.config));
+  }
+
+  load_json_config_file(title) {
     if (document.getElementById(this.name + '_open_dialog')) return;
     var box = document.createElement('div');
     box.id = this.name + '_open_dialog';
