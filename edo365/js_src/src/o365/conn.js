@@ -314,7 +314,6 @@ export class Connection {
         box.appendChild(input);
         var conn = this;
         input.onchange = function(){
-            console.log('change')
             open(function(state,cfg){
                 if(state==200){
                     this.config = JSON.parse(cfg);

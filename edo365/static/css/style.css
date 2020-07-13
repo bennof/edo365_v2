@@ -1,3 +1,12 @@
+.prompt {
+  position: fixed;
+  z-index: 9999;
+  background-color: white;
+  border: 1px solid grey;
+  bottom: 0; }
+  .prompt h1 {
+    background-color: lightblue; }
+
 html,
 body {
   margin: 0;
@@ -113,6 +122,7 @@ article {
   width: 100%; }
   article .content,
   article figure,
+  article table,
   article section {
     padding: 0;
     max-width: 600px;

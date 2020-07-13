@@ -12,6 +12,8 @@ $header_height_inner: #{$header_height - 10px} !default;
 $header_font_size: 12pt !default;
 $header_font_weight: 100 !default;
 
+@import 'scss/prompt';
+
 html, 
 body  {
     margin: 0;
@@ -162,6 +164,7 @@ article {
 
     .content,
     figure,
+    table,
     section {
         padding: 0;
         max-width: 600px; 

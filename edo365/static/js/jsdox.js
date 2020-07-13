@@ -740,7 +740,6 @@ class Connection {
     var conn = this;
 
     input.onchange = function () {
-      console.log('change');
       Object(_core_file__WEBPACK_IMPORTED_MODULE_2__["open"])(function (state, cfg) {
         if (state == 200) {
           this.config = JSON.parse(cfg);
