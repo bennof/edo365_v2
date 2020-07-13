@@ -310,7 +310,7 @@ export class Connection {
 
 
     save_json_config_file(name) {
-        save(name,'application/json',JSON.stringify(this.config));
+        save(name,'text/json',JSON.stringify(this.config));
     }
 
 

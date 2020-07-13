@@ -735,7 +735,7 @@ class Connection {
   }
 
   save_json_config_file(name) {
-    Object(_core_file__WEBPACK_IMPORTED_MODULE_2__["save"])(name, 'application/json', JSON.stringify(this.config));
+    Object(_core_file__WEBPACK_IMPORTED_MODULE_2__["save"])(name, 'text/json', JSON.stringify(this.config));
   }
 
   load_json_config_file(title) {
