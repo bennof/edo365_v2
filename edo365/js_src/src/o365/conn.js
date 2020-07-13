@@ -73,7 +73,9 @@ export class Connection {
                 },
                 logout: {
                     link: "",
-                    params: {}
+                    params: {
+                        post_logout_redirect_uri: ""
+                    }
                 }
 
             }
@@ -297,7 +299,7 @@ export class Connection {
      * convert config to a url hash element
      */
     config_to_url(){
-        return this.name+CONN_CFG+"="+base64UrlEncode(this.config);
+        return this.name+CONN_CFG+"="+encode_base64(this.config);
     }
 
     load_json_file(title){

@@ -476,7 +476,9 @@ class Connection {
         },
         logout: {
           link: "",
-          params: {}
+          params: {
+            post_logout_redirect_uri: ""
+          }
         }
       };
       this.save_config(); // safe data for session
@@ -723,7 +725,7 @@ class Connection {
 
 
   config_to_url() {
-    return this.name + CONN_CFG + "=" + base64UrlEncode(this.config);
+    return this.name + CONN_CFG + "=" + Object(_core_url__WEBPACK_IMPORTED_MODULE_0__["encode_base64"])(this.config);
   }
 
   load_json_file(title) {
