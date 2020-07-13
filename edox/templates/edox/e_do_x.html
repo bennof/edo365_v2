@@ -64,13 +64,13 @@
 
         {% for post in page.get_children %}
             <div  class="boxed">
-                {% with post=post.specific %}
-                    {% with post.hero as hero %}
+                {% with doc=post.specific %}
+                    {% with doc.hero as hero %}
                         {% if hero %}{% image hero fill-200x100 %}{% endif %}
                     {% endwith %}
                     <div class="content">
-                        <h2>{{ post.title }}</h2>
-                        <p>{{ post.intro }}</p>
+                        <h2>{{ doc.title }}</h2>
+                        <p>{{ doc.intro }}</p>
                         <a href="{% pageurl post %}">read more</a>
                     </div>
                 {% endwith %}
