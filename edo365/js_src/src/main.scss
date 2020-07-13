@@ -210,7 +210,18 @@ article {
         font-family: 'Neue Helvetica', Helvetica, sans-serif;
     }
 
-    
+    textarea {
+        width: 100%;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        caption {
+            font-size: small;
+            font-family: 'Neue Helvetica', Helvetica, sans-serif;
+        }
+    }
 
     section.footer {
         font-size: smaller;
@@ -221,14 +232,7 @@ article {
     margin-top: $header_height;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    caption {
-        font-size: smaller;
-        font-family: 'Neue Helvetica', Helvetica, sans-serif;
-    }
-}
+
 
 footer {
     font-family: 'Neue Helvetica', Helvetica, sans-serif;

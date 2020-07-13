@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 DEFAULT_PORT = "8080"
 ALLOWED_HOSTS = ['www2.edo365.de','localhost','127.0.0.1'] 
 ADMINS = [('Benno','benno.falkner@gmail.com')]
