@@ -177,6 +177,79 @@ function save(Filen, Mime, Data) {
 
 /***/ }),
 
+/***/ "./src/core/pageready.js":
+/*!*******************************!*\
+  !*** ./src/core/pageready.js ***!
+  \*******************************/
+/*! exports provided: on */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "on", function() { return on; });
+var ReadyFired = false;
+var ReadyList = [];
+var ReadyEventHandlersInstalled = false;
+function on(cb, ctx = document) {
+  if (typeof callback !== "function") {
+    throw new TypeError("callback for Ready(fn) must be a function");
+  }
+
+  if (ReadyFired) {
+    // execute function
+    setTimeout(function () {
+      cb(ctx);
+    }, 1);
+    return;
+  } else {
+    // schedule for document ready
+    ReadyList.push({
+      func: cb,
+      ctx: ctx
+    });
+  }
+
+  if (document.readyState === "complete") {
+    setTimeout(ready_run, 1);
+  } else if (!ReadyEventHandlersInstalled) {
+    // add handler if missing
+    if (document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", ready_run, false);
+      window.addEventListener("load", ready_run, false);
+    } else {
+      document.attachEvent("onreadystatechange", readyStateChange);
+      window.attachEvent("onload", ready_run);
+    }
+
+    ReadyEventHandlersInstalled = true;
+  }
+}
+;
+
+function readyStateChange() {
+  if (document.readyState === "complete") {
+    ready_run();
+  }
+}
+
+;
+
+function ready_run() {
+  if (!ReadyFired) {
+    ReadyFired = true; // loop list
+
+    for (var i = 0; i < ReadyList.length; i++) {
+      ReadyList[i].func.call(window, ReadyList[i].ctx); //execute
+    }
+
+    ReadyList = []; // clear
+  }
+}
+
+;
+
+/***/ }),
+
 /***/ "./src/core/tools.js":
 /*!***************************!*\
   !*** ./src/core/tools.js ***!
@@ -337,7 +410,7 @@ function decode_base64(input) {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! exports provided: url, file, o365, Table, TableView, version */
+/*! exports provided: url, file, o365, pageready, Table, TableView, version */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -347,13 +420,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "url", function() { return _core_url__WEBPACK_IMPORTED_MODULE_0__; });
 /* harmony import */ var _core_file__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/file */ "./src/core/file.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "file", function() { return _core_file__WEBPACK_IMPORTED_MODULE_1__; });
-/* harmony import */ var _o365_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./o365/index */ "./src/o365/index.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "o365", function() { return _o365_index__WEBPACK_IMPORTED_MODULE_2__; });
-/* harmony import */ var _table_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./table/table */ "./src/table/table.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Table", function() { return _table_table__WEBPACK_IMPORTED_MODULE_3__["Table"]; });
+/* harmony import */ var _core_pageready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/pageready */ "./src/core/pageready.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "pageready", function() { return _core_pageready__WEBPACK_IMPORTED_MODULE_2__; });
+/* harmony import */ var _o365_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./o365/index */ "./src/o365/index.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "o365", function() { return _o365_index__WEBPACK_IMPORTED_MODULE_3__; });
+/* harmony import */ var _table_table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./table/table */ "./src/table/table.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Table", function() { return _table_table__WEBPACK_IMPORTED_MODULE_4__["Table"]; });
 
-/* harmony import */ var _table_table_view__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./table/table_view */ "./src/table/table_view.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TableView", function() { return _table_table_view__WEBPACK_IMPORTED_MODULE_4__["TableView"]; });
+/* harmony import */ var _table_table_view__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./table/table_view */ "./src/table/table_view.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TableView", function() { return _table_table_view__WEBPACK_IMPORTED_MODULE_5__["TableView"]; });
 
 /* Copyright (c) 2018-2020 Benjamin 'Benno' Falkner
 **
@@ -375,6 +450,7 @@ __webpack_require__.r(__webpack_exports__);
 ** OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ** SOFTWARE.
 */
+
 
 
 

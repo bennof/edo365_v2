@@ -21,6 +21,7 @@
 
 import * as url from './core/url';
 import * as file from './core/file';
+import * as pageready from './core/pageready';
 
 import * as o365 from './o365/index';
 
@@ -33,6 +34,7 @@ export {
     url,
     file,
     o365,
+    pageready,
 
     // Objects
     Table,
