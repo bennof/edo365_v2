@@ -190,21 +190,22 @@ __webpack_require__.r(__webpack_exports__);
 var ReadyFired = false;
 var ReadyList = [];
 var ReadyEventHandlersInstalled = false;
-function on(cb, ctx = document) {
-  if (typeof callback !== "function") {
-    throw new TypeError("callback for Ready(fn) must be a function");
+function on(cb, args, ctx = document) {
+  if (typeof cb !== "function") {
+    throw new TypeError("callback for on(fn) must be a function");
   }
 
   if (ReadyFired) {
     // execute function
     setTimeout(function () {
-      cb(ctx);
+      cb.apply(ctx, args);
     }, 1);
     return;
   } else {
     // schedule for document ready
     ReadyList.push({
       func: cb,
+      args: args,
       ctx: ctx
     });
   }
@@ -239,7 +240,7 @@ function ready_run() {
     ReadyFired = true; // loop list
 
     for (var i = 0; i < ReadyList.length; i++) {
-      ReadyList[i].func.call(window, ReadyList[i].ctx); //execute
+      ReadyList[i].func.apply(ReadyList[i].ctx, ReadyList[i].args); //execute
     }
 
     ReadyList = []; // clear
