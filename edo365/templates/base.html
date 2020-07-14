@@ -20,7 +20,14 @@
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/jsdox.js' %}"></script>
         <script>
-            
+            // Init
+            var conn = new jsdox.o365.Connection("O365_SCHOOL",{
+                logged_in: function(c){
+                    var elem = document.getElementById("login_link");
+                    elem.innerHTML = c.id.name + " (logout)" || "logout";
+                    elem.href = "javascript:conn.close()";
+                }
+            });
         </script>
 
 
@@ -44,14 +51,7 @@
         {% endblock %}
         <script>
             // Control Page
-            // Init
-            var conn = new jsdox.o365.Connection("O365_SCHOOL",{
-                logged_in: function(c){
-                    var elem = document.getElementById("login_link");
-                    elem.innerHTML = c.id.name + " (logout)" || "logout";
-                    elem.href = "javascript:conn.close()";
-                }
-            });
+            
         </script>
     </body>
 </html>
