@@ -30,7 +30,7 @@
  * @returns a map of header fields
  */
 export function get_header(res){
-    var i, elem, key, value, r={}, hl = Xhttp.getAllResponseHeaders().trim().split(/[\r\n]+/);
+    var i, elem, key, value, r={}, hl = res.getAllResponseHeaders().trim().split(/[\r\n]+/);
     for ( i=0; i<hl.length; i++ ) {
         elem = hl[i].split(': ');
         key   = elem.shift();
