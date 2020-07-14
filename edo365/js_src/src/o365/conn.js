@@ -22,6 +22,7 @@
 import {get_hash, decode_base64, encode_base64, get_header} from '../core/url'
 import {map} from '../core/tools';
 import {open, save} from '../core/file';
+import * as ready from '../core/pageready';
 
 // used constants
 const  CONN_CFG = "_conn_cfg";
@@ -140,7 +141,7 @@ export class Connection {
 
         if(setup){
             if(setup.logged_in && this.access_token){
-                setup.logged_in(this);
+                ready.on(setup.logged_in,this);
             }
         }
     }

@@ -57,7 +57,7 @@ export function save(Filen, Mime, Data) { // Mime text/csv;charset=utf-8
         FileLink.setAttribute('href', 'data:'+Mime+',' + encodeURIComponent(Data));
     else
         FileLink.setAttribute('href', 'data:'+Mime+',' + btoa(Data));
-    FileLink.setAttribute('download', Filen);
+        FileLink.setAttribute('download', Filen);
   
     if (document.createEvent) {
         var Event = document.createEvent('MouseEvents');
