@@ -161,7 +161,8 @@ article {
     width: 100%; }
   article table {
     border-collapse: collapse;
-    width: 100%; }
+    width: 100%;
+    font-size: small; }
     article table caption {
       font-size: small;
       font-family: 'Neue Helvetica', Helvetica, sans-serif; }

@@ -53,6 +53,15 @@ export class TableView {
     update(){}
 
     on_click(e){
-        console.log(e);
+        var row = null;
+        if ( e.target.nodeName == 'TR' ){
+            row = e.target;
+        } else if (e.target.parentNode.nodeName == 'TR') {
+            row = e.target.parentNode;
+        } else {
+            return;
+        }
+        row.childNodes[0].childNodes[0].checked ^= true;
+        console.log(row);
     }
 }
