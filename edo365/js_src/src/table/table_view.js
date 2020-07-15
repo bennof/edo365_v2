@@ -72,8 +72,8 @@ export class TableView {
             var row = this.target.childNodes[i];
             if(row.nodeName == 'TR'){
                 chk = row.childNodes[0].childNodes[0];
-                if (chk.checked){
-                r.push(chk.pos_id);
+                if (chk.checked)
+                    r.push(chk.pos_id);
             }
         }
         return r;
