@@ -169,22 +169,12 @@ export function ls_owner(fun, gid, conn){
 }
 
 
-// helper
-export function list_all_groups(fun, conn) {
-    conn.request(fun, 
-        "GET", 
-        "https://graph.microsoft.com/beta/groups/?$select=id,displayname,createdDateTime,expirationDateTime",
-        null, // body
-        "text/json", // mime
-        {} // params
-    );
-}
 
 /**
  * get all teams
  * @param {*} fun handler function f 
  * @param {*} conn office 365 connection
  */
-function list_all_groups(fun, conn) {
+export function list_all_groups(fun, conn) {
     conn.json_request(fun, "GET", "https://graph.microsoft.com/beta/groups/?$select=id,displayname,createdDateTime,expirationDateTime", null, {});
 }
