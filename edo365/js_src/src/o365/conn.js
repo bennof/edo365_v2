@@ -360,6 +360,6 @@ function json_req_handle(state,body,header){
             this.fun(state,this.data, header);
         }
     } else {
-        this.fun(state,(this.data)? this.data:[],header);
+        this.fun(state, body, header);
     }
 }

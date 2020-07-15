@@ -26,6 +26,7 @@ export class Notify {
         box.appendChild(body);
         notify_block.appendChild(box);
         this.elem = box;
+        this.body = body;
     }
 
     exit(){
