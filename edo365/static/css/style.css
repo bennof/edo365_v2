@@ -160,6 +160,7 @@ article {
   article textarea {
     width: 100%; }
   article table {
+    position: relative;
     border-collapse: collapse;
     border: 1px solid #929292;
     width: 100%;
@@ -167,12 +168,12 @@ article {
     font-family: "Neue Helvetica", Helvetica, sans-serif;
     caption-side: bottom;
     overflow: auto;
-    max-height: calc(100%-80px); }
+    max-height: calc(100vh-80px); }
     article table th {
       text-align: left;
       background-color: #3366cc;
       color: white;
-      padding: 0px 4px; }
+      padding: 4px 0px; }
     article table tr:hover {
       background-color: #929292; }
     article table caption {

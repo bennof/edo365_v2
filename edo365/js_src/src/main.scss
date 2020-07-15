@@ -225,6 +225,7 @@ article {
     }
 
     table {
+        position: relative;
         border-collapse: collapse;
         border: 1px solid $color4;
         width: 100%;
@@ -232,13 +233,13 @@ article {
         font-family: $fonts2;
         caption-side: bottom;
         overflow: auto;
-        max-height: calc(100%-80px);
+        max-height: calc(100vh-80px);
 
         th {
             text-align: left;
             background-color: $color1;
             color: white;
-            padding: 0px 4px;
+            padding: 4px 0px;
         }
 
         tr:hover {
