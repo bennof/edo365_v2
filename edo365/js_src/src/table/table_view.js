@@ -34,7 +34,8 @@ export class TableView {
             cell = document.createElement('td');
             chk = document.createElement('input');
             chk.type = "checkbox"; 
-            chk.name = this.target.id+"_chk_"+i+"_"+j; 
+            chk.name = this.target.id+"_chk_"+i; 
+            chk.pos_id = i; 
             chk.id =  chk.name; 
             cell.appendChild(chk)
             row.appendChild(cell);
@@ -66,10 +67,13 @@ export class TableView {
     }
 
     get_selected(){
-        var r = [];
+        var row, chk, r = [];
         for(var i = 1; i < this.target.childElementCount; i++){
-            if(this.target.childNodes[i].childNodes[0].childNodes[0].checked){
-                r.push(i-1);
+            var row = this.target.childNodes[i];
+            if(row.nodeName == 'TR'){
+                chk = row.childNodes[0].childNodes[0];
+                if (chk.checked){
+                r.push(chk.pos_id);
             }
         }
         return r;
