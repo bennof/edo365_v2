@@ -22,6 +22,7 @@
 import * as url from './core/url';
 import * as file from './core/file';
 import * as ready from './core/pageready';
+import * as notes from './core/prompt';
 
 import * as o365 from './o365/index';
 
