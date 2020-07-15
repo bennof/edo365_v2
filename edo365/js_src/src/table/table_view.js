@@ -44,10 +44,10 @@ export class TableView {
                 row.appendChild(cell);
             }
             tab.appendChild(row);
-            tab.appendChild(caption);
-
-            tab.onclick(this.on_click)
         }
+        tab.appendChild(caption);
+        tab.onclick = this.on_click;
+        
     }
 
     update(){}
