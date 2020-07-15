@@ -36,6 +36,7 @@ export {
     file,
     o365,
     ready,
+    notes,
 
     // Objects
     Table,
