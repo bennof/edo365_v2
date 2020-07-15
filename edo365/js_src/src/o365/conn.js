@@ -348,11 +348,15 @@ export class Connection {
 
 function json_req_handle(state,body,header){
     if(state === 200) {
-        var json = JSON.parse(body)
-        this.data = (this.data) ? this.data.concat(json.value) : json.value;
-        if(json["@odata.nextLink"]) { // if there is more data
-            this.conn.request(json_req_handle.bind(this),'GET',json["@odata.nextLink"],null,null);
-        } else { //transfer complete
+        try {
+            var json = JSON.parse(body)
+            this.data = (this.data) ? this.data.concat(json.value) : json.value;
+            if(json["@odata.nextLink"]) { // if there is more data
+                this.conn.request(json_req_handle.bind(this),'GET',json["@odata.nextLink"],null,null);
+            } else { //transfer complete
+                this.fun(state,this.data, header);
+            }
+        } catch(e) {
             this.fun(state,this.data, header);
         }
     } else {
