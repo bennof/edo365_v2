@@ -2,7 +2,7 @@
 var notify_block = null;
 
 
-class Notify {
+export class Notify {
     constructor(id, title, content){
         if (notify_block == null){
             notify_block = document.createElement('div');
