@@ -103,13 +103,7 @@ export function rm(fun, gid, conn){
 }
 
 export function ls(fun, conn) {
-    conn.request(fun, 
-        "GET", 
-        "https://graph.microsoft.com/beta/groups/?$select=id,displayname,createdDateTime,expirationDateTime&$filter=groupTypes/any(c:c+eq+'Unified')", 
-        null, // body
-        "text/json", // mime
-        {} // params
-    );
+    conn.json_request(fun, "GET", "https://graph.microsoft.com/beta/groups/?$select=id,displayname,createdDateTime,expirationDateTime&$filter=groupTypes/any(c:c+eq+'Unified')", null,{});
 }
 
 export function add_member(fun, conn){
