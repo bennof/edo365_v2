@@ -29,10 +29,15 @@ $fonts2: 'Neue Helvetica', Helvetica, sans-serif;
     margin: 3px;
     padding: 0;
     background-color: rgba($color4, 0.6);
-    border-radius: 5px;
+    border-radius: 10px;
     color: white;
     h1 {
         background-color: $color1;
         margin: 0px;
+        padding: 5px;
+    }
+    body {
+        margin: 0px;
+        padding: 5px;
     }
 }

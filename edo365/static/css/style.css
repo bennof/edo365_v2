@@ -16,11 +16,15 @@
   margin: 3px;
   padding: 0;
   background-color: rgba(146, 146, 146, 0.6);
-  border-radius: 5px;
+  border-radius: 10px;
   color: white; }
   .notify h1 {
     background-color: #3366cc;
-    margin: 0px; }
+    margin: 0px;
+    padding: 5px; }
+  .notify body {
+    margin: 0px;
+    padding: 5px; }
 
 html,
 body {

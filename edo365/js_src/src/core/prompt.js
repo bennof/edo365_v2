@@ -18,16 +18,18 @@ export class Notify {
         var header = document.createElement('h1');
         header.innerHTML = title;
         box.appendChild(header);
+        var body = document.createElement('div');
         if (typeof content == 'string')
-            box.innerHTML += content;
+            body.innerHTML += content;
         else
-            box.appendChild(content);
+            body.appendChild(content);
+        box.appendChild(body);
         notify_block.appendChild(box);
         this.elem = box;
     }
 
     exit(){
-        notify_block.removeChild(this.elem);
+        this.elem.parentNode.removeChild(this.elem);
     }
 
     timeout(sec){
