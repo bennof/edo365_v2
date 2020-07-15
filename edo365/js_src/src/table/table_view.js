@@ -11,7 +11,8 @@ export class TableView {
     }
 
     draw(){
-        var caption = this.target.querySelector('caption').innerHTML;
+
+        var caption = this.target.querySelector('caption');
         var tab = this.target;
         tab.innerHTML = "";
         var cell, chk, row = document.createElement('tr');
@@ -43,6 +44,7 @@ export class TableView {
                 row.appendChild(cell);
             }
             tab.appendChild(row);
+            tab.appendChild(caption);
 
             tab.onclick(this.on_click)
         }
