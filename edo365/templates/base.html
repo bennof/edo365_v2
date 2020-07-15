@@ -24,7 +24,6 @@
             var conn = new jsdox.o365.Connection("O365_SCHOOL",{
                 logged_in: function(c){
                     console.log('A Login detected');
-                    console.log(c);
                     var elem = document.getElementById("login_link");
                     elem.innerHTML = c.id.name + " (logout)" || "logout";
                     elem.href = "javascript:conn.close()";
