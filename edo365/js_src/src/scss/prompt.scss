@@ -1,4 +1,9 @@
-
+$color1: #3366cc;
+$color2: #FE9903;
+$color3: #003399;
+$color4: #929292;
+$fonts1: 'Times New Roman', Times, serif;
+$fonts2: 'Neue Helvetica', Helvetica, sans-serif;
 
 .prompt {
     position: fixed;
@@ -12,6 +17,20 @@
         background-color: lightblue;
     }
 
+}
 
+.notify_block {
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+}
 
+.notify {
+    padding: 3px;
+    background-color: rgba($color4, 0.6);
+    border-radius: 5px;
+    color: white;
+    h1 {
+        background-color: $color1;
+    }
 }

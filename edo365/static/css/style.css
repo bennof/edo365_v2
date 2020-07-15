@@ -7,6 +7,19 @@
   .prompt h1 {
     background-color: lightblue; }
 
+.notify_block {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0; }
+
+.notify {
+  padding: 3px;
+  background-color: rgba(146, 146, 146, 0.6);
+  border-radius: 5px;
+  color: white; }
+  .notify h1 {
+    background-color: #3366cc; }
+
 html,
 body {
   margin: 0;
@@ -160,7 +173,7 @@ article {
   article textarea {
     width: 100%; }
   article table {
-    position: relative;
+    display: block;
     border-collapse: collapse;
     border: 1px solid #929292;
     width: 100%;
