@@ -26,7 +26,7 @@ import * as notes from './core/prompt';
 
 import * as o365 from './o365/index';
 
-import {Table} from './table/table';
+import {Table, cmp} from './table/table';
 import {TableView} from './table/table_view';
 
 
@@ -37,6 +37,7 @@ export {
     o365,
     ready,
     notes,
+    cmp,
 
     // Objects
     Table,
