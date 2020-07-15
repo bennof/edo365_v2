@@ -7,6 +7,8 @@ export function on(cb, args, ctx = document){
     throw new TypeError("callback for on(fn) must be a function");
   }
 
+  console.log({func: cb, args: args, ctx: ctx});
+
   if ( ReadyFired ) { // execute function
     setTimeout(function() {cb.apply(ctx,args);}, 1);
     return;
@@ -41,6 +43,7 @@ function ready_run () {
 
     // loop list
     for (var i = 0; i < ReadyList.length; i++) {
+      console.log(i,ReadyList[i]);
       ReadyList[i].func.apply(ReadyList[i].ctx,ReadyList[i].args); //execute
     }
     ReadyList = []; // clear
