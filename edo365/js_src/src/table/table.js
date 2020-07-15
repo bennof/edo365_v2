@@ -360,14 +360,13 @@ export class Table {
                 return;
             }
         }
-        for(i=0; i < obj.length; i++){
+        for(var i=0; i < obj.length; i++){
             l = new Array(this.header.length);
             for(j=0; j<this.header.length; j++ ){
                 l[j] = obj[i][this.header[j]];
             }
             this.data.push(l);
         } 
-
     }
 
     read_csv(Text, FS, No_Header) {
