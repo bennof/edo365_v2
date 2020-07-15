@@ -141,7 +141,7 @@ export class Connection {
 
         if(setup){
             if(setup.logged_in && this.access_token){
-                ready.on(setup.logged_in,this);
+                ready.on(setup.logged_in,[this]);
             }
         }
     }
