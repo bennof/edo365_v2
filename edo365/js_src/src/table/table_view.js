@@ -68,7 +68,7 @@ export class TableView {
     get_selected(){
         var r = [];
         for(var i = 1; i < this.target.childElementCount; i++){
-            if(this.tartget.childNodes[i].childNodes[0].checked)
+            if(this.target.childNodes[i].childNodes[0].checked)
                 r.push(i-1);
         }
         return r;
