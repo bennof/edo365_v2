@@ -13,12 +13,14 @@
   bottom: 0; }
 
 .notify {
-  padding: 3px;
+  margin: 3px;
+  padding: 0;
   background-color: rgba(146, 146, 146, 0.6);
   border-radius: 5px;
   color: white; }
   .notify h1 {
-    background-color: #3366cc; }
+    background-color: #3366cc;
+    margin: 0px; }
 
 html,
 body {

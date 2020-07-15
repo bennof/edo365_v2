@@ -26,11 +26,13 @@ $fonts2: 'Neue Helvetica', Helvetica, sans-serif;
 }
 
 .notify {
-    padding: 3px;
+    margin: 3px;
+    padding: 0;
     background-color: rgba($color4, 0.6);
     border-radius: 5px;
     color: white;
     h1 {
         background-color: $color1;
+        margin: 0px;
     }
 }
