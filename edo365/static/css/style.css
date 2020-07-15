@@ -165,11 +165,14 @@ article {
     width: 100%;
     font-size: small;
     font-family: "Neue Helvetica", Helvetica, sans-serif;
-    caption-side: bottom; }
+    caption-side: bottom;
+    overflow: auto;
+    max-height: calc(100%-80px); }
     article table th {
       text-align: left;
       background-color: #3366cc;
-      color: white; }
+      color: white;
+      padding: 0px 4px; }
     article table tr:hover {
       background-color: #929292; }
     article table caption {

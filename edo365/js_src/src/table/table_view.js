@@ -16,7 +16,7 @@ export class TableView {
         var tab = this.target;
         tab.innerHTML = "";
         var cell, chk, row = document.createElement('tr');
-        cell = document.createElement('td');
+        cell = document.createElement('th');
         //chk = document.createElement('input');
         //chk.type = "checkbox"; 
         //chk.name = this.target.id+"_chk_all"; 
@@ -63,7 +63,6 @@ export class TableView {
             return;
         }
         row.childNodes[0].childNodes[0].checked ^= true;
-        console.log(row);
     }
 
     get_selected(){

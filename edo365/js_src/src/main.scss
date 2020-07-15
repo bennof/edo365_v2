@@ -231,11 +231,14 @@ article {
         font-size: small;
         font-family: $fonts2;
         caption-side: bottom;
+        overflow: auto;
+        max-height: calc(100%-80px);
 
         th {
             text-align: left;
             background-color: $color1;
             color: white;
+            padding: 0px 4px;
         }
 
         tr:hover {
