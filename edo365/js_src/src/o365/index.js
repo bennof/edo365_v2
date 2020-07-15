@@ -20,8 +20,10 @@
 */
 
 import { Connection } from './conn';
-
+import * as teams from './teams';
 
 export {
-    Connection
+    Connection,
+
+    teams
 }

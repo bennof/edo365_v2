@@ -161,20 +161,41 @@ article {
     width: 100%; }
   article table {
     border-collapse: collapse;
+    border: 1px solid #929292;
     width: 100%;
-    font-size: small; }
+    font-size: small;
+    font-family: "Neue Helvetica", Helvetica, sans-serif;
+    caption-side: bottom; }
+    article table th {
+      text-align: left;
+      background-color: #3366cc;
+      color: white; }
+    article table tr:hover {
+      background-color: #929292; }
     article table caption {
       font-size: small;
       font-family: 'Neue Helvetica', Helvetica, sans-serif; }
   article section.footer {
     font-size: smaller; }
+  article button {
+    background-color: #3366cc;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px; }
 
 .has-menubar {
   margin-top: 40px; }
 
 footer {
   font-family: 'Neue Helvetica', Helvetica, sans-serif;
-  color: grey;
+  color: #929292;
   font-size: small;
   text-align: center; }
 

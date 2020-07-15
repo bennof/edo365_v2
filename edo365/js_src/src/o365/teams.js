@@ -1,4 +1,4 @@
-import { get } from "../../OneDrive/dev/dev/tabularrasa/src/js/net";
+//import { get } from "../../OneDrive/dev/dev/tabularrasa/src/js/net";
 
 export function info(fun, gid,conn){
     conn.request(fun, 
@@ -178,4 +178,13 @@ export function list_all_groups(fun, conn) {
         "text/json", // mime
         {} // params
     );
+}
+
+/**
+ * get all teams
+ * @param {*} fun handler function f 
+ * @param {*} conn office 365 connection
+ */
+function list_all_groups(fun, conn) {
+    conn.json_request(fun, "GET", "https://graph.microsoft.com/beta/groups/?$select=id,displayname,createdDateTime,expirationDateTime", null, {});
 }

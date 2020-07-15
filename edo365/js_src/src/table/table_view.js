@@ -17,11 +17,11 @@ export class TableView {
         tab.innerHTML = "";
         var cell, chk, row = document.createElement('tr');
         cell = document.createElement('td');
-        chk = document.createElement('input');
-        chk.type = "checkbox"; 
-        chk.name = this.target.id+"_chk_all"; 
-        chk.id =  chk.name; 
-        cell.appendChild(chk)
+        //chk = document.createElement('input');
+        //chk.type = "checkbox"; 
+        //chk.name = this.target.id+"_chk_all"; 
+        //chk.id =  chk.name; 
+        //cell.appendChild(chk)
         row.appendChild(cell);
         for(var i=0;i<this.table.header.length;i++){
             cell = document.createElement('th');

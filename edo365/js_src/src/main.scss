@@ -1,5 +1,15 @@
+$color1: #3366cc;
+$color2: #FE9903;
+$color3: #003399;
+$color4: #929292;
+$fonts1: 'Times New Roman', Times, serif;
+$fonts2: 'Neue Helvetica', Helvetica, sans-serif;
+
+
+
 $text-color: #35393C;
 $text-hl-color: #5fc2f0;
+
 
 $header_bg_color: $text-color !default;
 $header_bg_color_hl: darken( $color:$header_bg_color, $amount: 0.4) !default;
@@ -216,8 +226,22 @@ article {
 
     table {
         border-collapse: collapse;
+        border: 1px solid $color4;
         width: 100%;
         font-size: small;
+        font-family: $fonts2;
+        caption-side: bottom;
+
+        th {
+            text-align: left;
+            background-color: $color1;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: $color4;
+        }
+
         caption {
             font-size: small;
             font-family: 'Neue Helvetica', Helvetica, sans-serif;
@@ -226,6 +250,20 @@ article {
 
     section.footer {
         font-size: smaller;
+    }
+
+    button {
+        background-color: $color1;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
     }
 }
 
@@ -237,7 +275,7 @@ article {
 
 footer {
     font-family: 'Neue Helvetica', Helvetica, sans-serif;
-    color: grey;
+    color: $color4;
     font-size: small;
     text-align: center;
 }
