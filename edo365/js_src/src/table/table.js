@@ -360,7 +360,7 @@ export class Table {
                 return;
             }
         }
-        var l,i;
+        var l,i,j;
         for( i=0; i < obj.length; i++){
             l = new Array(this.header.length);
             for(j=0; j<this.header.length; j++ ){
