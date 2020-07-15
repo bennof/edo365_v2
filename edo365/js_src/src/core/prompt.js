@@ -7,6 +7,7 @@ export class Notify {
         if (notify_block == null){
             notify_block = document.createElement('div');
             notify_block.classList.add('notify_block');
+            document.body.appendChild(notify_block);
         }
         this.id = id;
         if(document.getElementById(this.id+'_notify'))
