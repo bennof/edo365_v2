@@ -16,14 +16,7 @@
             <p class="meta">- {{ page.date }} -</p>
             <div class="intro">{{ page.intro|richtext }}</div>
 
-            {% if page.tags.all.count %}
-            <div class="tags">
-                <h5>Tags</h5>
-                {% for tag in page.tags.all %}
-                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
-                {% endfor %}
-            </div>
-            {% endif %}
+            
         </div>
     </section>
 
@@ -77,9 +70,18 @@
             </div>
         {% endfor %}
 
+        {% if page.tags.all.count %}
+        <div class="tags">
+            <h5>Tags</h5>
+            {% for tag in page.tags.all %}
+                <a href="{% slugurl 'tags' %}?tag={{ tag }}">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
         <p>
             {% if page.get_parent.url %}
-            <a href="{{ page.get_parent.url }}">Return to blog</a>
+            <a href="{{ page.get_parent.url }}">Zurück</a>
             {% endif %}
             {% if page.get_parent.url %}
             <b><a href="{{ page.next }}">{{ page.next }}</a></b>

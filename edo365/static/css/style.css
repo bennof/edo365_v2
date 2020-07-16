@@ -170,7 +170,7 @@ article {
     font-weight: 100;
     font-family: 'Neue Helvetica', Helvetica, sans-serif; }
     article section.header .content {
-      margin-top: 30px; }
+      bottom: 0; }
     article section.header img.bg {
       pointer-events: none;
       position: absolute;
