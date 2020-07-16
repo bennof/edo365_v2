@@ -201,7 +201,10 @@ article {
         overflow: hidden;
 
         .content {
+            position: absolute;
             bottom: 0;
+            left:50%;
+            margin-left:-150px;
         }
 
         img.bg {
@@ -225,6 +228,7 @@ article {
     }
 
     table {
+        margin: 10px 0px;
         display: block;
         border-collapse: collapse;
         width: 100%;
@@ -232,17 +236,10 @@ article {
         font-family: $fonts2;
         caption-side: bottom;
         overflow: auto;
+        table-layout: fixed;
         
         max-height: calc(100vh-80px);
 
-        /*thead,*/ 
-        tbody { display: block; }
-
-        tbody {
-            height: 80vh;       /* Just for the demo          */
-            overflow-y: auto;    /* Trigger vertical scroll    */
-            overflow-x: hidden;  /* Hide the horizontal scroll */
-        }
 
         th {
             text-align: left;

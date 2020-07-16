@@ -170,7 +170,10 @@ article {
     font-weight: 100;
     font-family: 'Neue Helvetica', Helvetica, sans-serif; }
     article section.header .content {
-      bottom: 0; }
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -150px; }
     article section.header img.bg {
       pointer-events: none;
       position: absolute;
@@ -182,6 +185,7 @@ article {
   article textarea {
     width: 100%; }
   article table {
+    margin: 10px 0px;
     display: block;
     border-collapse: collapse;
     width: 100%;
@@ -189,17 +193,8 @@ article {
     font-family: "Neue Helvetica", Helvetica, sans-serif;
     caption-side: bottom;
     overflow: auto;
-    max-height: calc(100vh-80px);
-    /*thead,*/ }
-    article table tbody {
-      display: block; }
-    article table tbody {
-      height: 80vh;
-      /* Just for the demo          */
-      overflow-y: auto;
-      /* Trigger vertical scroll    */
-      overflow-x: hidden;
-      /* Hide the horizontal scroll */ }
+    table-layout: fixed;
+    max-height: calc(100vh-80px); }
     article table th {
       text-align: left;
       background-color: #3366cc;
