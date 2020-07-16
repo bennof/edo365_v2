@@ -181,7 +181,6 @@ article {
   article table {
     display: block;
     border-collapse: collapse;
-    border: 1px solid #929292;
     width: 100%;
     font-size: small;
     font-family: "Neue Helvetica", Helvetica, sans-serif;

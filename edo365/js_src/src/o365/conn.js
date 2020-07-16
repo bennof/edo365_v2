@@ -84,7 +84,7 @@ export class Connection {
         }
 
         // checking for login information
-        var state = localStorage.getItem(this.name + CONN_STATE) || [];
+        var state = JSON.parse(localStorage.getItem(this.name + CONN_STATE)) || [];
         // state info from url hash overrides saved state
         this.access_token = hash.access_token || state.access_token || null;
         this.refresh_token = hash.refresh_token || state.refresh_token || null;
@@ -259,13 +259,12 @@ export class Connection {
             req.setRequestHeader("Authorization", "Bearer "+this.access_token);
             map(req.setRequestHeader.bind(req),r.param);
             req.conn = this;
-            req.fun = r.fun;
-            req.body = r.body;
+            req.request = r;
             req.onreadystatechange = function(){
                 if(req.readyState === 4 ){
                     //missing handle refresh error
                     var header = get_header(req);
-                    req.fun(req.status, req.response, header);
+                    req.request.fun(req.status, req.response, header);
                     req.conn.req = false;
                     req.conn.process_requests();
                 }

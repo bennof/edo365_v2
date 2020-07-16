@@ -92,16 +92,21 @@ export function mk(fun, name, params, conn){
     );
 }
 
+/**
+ * 
+ * @param {*} fun removes a team
+ * @param {*} gid 
+ * @param {*} conn 
+ */
 export function rm(fun, gid, conn){
-    conn.request(fun, 
-        "DELETE", 
-        "https://graph.microsoft.com/beta/groups/"+gid,
-        null, // body
-        "", // mime
-        {} // params
-    );
+    conn.json_request(fun,"DELETE","https://graph.microsoft.com/beta/groups/"+gid,null,{});
 }
 
+/**
+ * list all teams
+ * @param {*} fun 
+ * @param {*} conn 
+ */
 export function ls(fun, conn) {
     conn.json_request(fun, "GET", "https://graph.microsoft.com/beta/groups/?$select=id,displayname,createdDateTime,expirationDateTime&$filter=groupTypes/any(c:c+eq+'Unified')", null,{});
 }
@@ -165,7 +170,7 @@ export function ls_owner(fun, gid, conn){
 
 
 /**
- * get all teams
+ * get all groups
  * @param {*} fun handler function f 
  * @param {*} conn office 365 connection
  */

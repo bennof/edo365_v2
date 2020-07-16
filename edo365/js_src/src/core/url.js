@@ -80,3 +80,22 @@ export function decode_base64(input){
     var json = atob(base64);
     return JSON.parse(json);
 }
+
+export function to_UTF8(str) {
+    var i,C, R = []; // unknown expected length
+    for (i=0; i< str.length; i++) { // loop string chars
+      var C = str.charCodeAt(i);
+      if (C < 0x80)
+        R.push(C);
+      else if (C < 0x800)
+        R.push(0xc0 | (C >> 6), 0x80 | (C & 0x3f));
+      else if (C < 0xd800 || C >= 0xe000)
+        R.push(0xe0 | (C >> 12), 0x80 | ((C>>6) & 0x3f), 0x80 | (C & 0x3f));
+      else {
+          i++;
+          C = ((C&0x3ff)<<10)|(str.charCodeAt(i)&0x3ff);
+          R.push(0xf0 | (C >>18), 0x80 | ((C>>12) & 0x3f), 0x80 | ((C>>6) & 0x3f), 0x80 | (C & 0x3f));
+      }
+    }
+    return R;
+}

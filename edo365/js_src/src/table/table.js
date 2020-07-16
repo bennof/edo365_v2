@@ -92,6 +92,7 @@ export class Table {
         }
     }
 
+
     // deprecated
     map1(Fun, offset, length) {
         if (length == undefined || length > this.data.length || length < 0) length = this.data.length;

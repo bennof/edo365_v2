@@ -21,9 +21,13 @@
 
 import { Connection } from './conn';
 import * as teams from './teams';
+import * as users from './users';
+import {Mail}from './mail';
 
 export {
     Connection,
+    Mail,
 
-    teams
+    teams,
+    users
 }

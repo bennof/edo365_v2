@@ -65,14 +65,25 @@ export class TableView {
         row.childNodes[0].childNodes[0].checked ^= true;
     }
 
-    get_selected(){
+    get_selected(col){
         var row, chk, r = [];
-        for(var i = 1; i < this.target.childElementCount; i++){
-            var row = this.target.childNodes[i];
-            if(row.nodeName == 'TR'){
-                chk = row.childNodes[0].childNodes[0];
-                if (chk.checked)
-                    r.push(chk.pos_id);
+        if(col){
+            for(var i = 1; i < this.target.childElementCount; i++){
+                var row = this.target.childNodes[i];
+                if(row.nodeName == 'TR'){
+                    chk = row.childNodes[0].childNodes[0];
+                    if (chk.checked)
+                        r.push(row.childNodes[col].innerText);
+                }
+            }
+        } else {
+            for(var i = 1; i < this.target.childElementCount; i++){
+                var row = this.target.childNodes[i];
+                if(row.nodeName == 'TR'){
+                    chk = row.childNodes[0].childNodes[0];
+                    if (chk.checked)
+                        r.push(chk.pos_id);
+                }
             }
         }
         return r;
