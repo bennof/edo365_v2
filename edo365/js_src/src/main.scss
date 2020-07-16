@@ -232,9 +232,11 @@ article {
         font-family: $fonts2;
         caption-side: bottom;
         overflow: auto;
+        
         max-height: calc(100vh-80px);
 
-        thead, tbody { display: block; }
+        /*thead,*/ 
+        tbody { display: block; }
 
         tbody {
             height: 80vh;       /* Just for the demo          */
@@ -254,6 +256,7 @@ article {
         }
 
         caption {
+            width: 100%;
             font-size: small;
             font-family: 'Neue Helvetica', Helvetica, sans-serif;
         }
