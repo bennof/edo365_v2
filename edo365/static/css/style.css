@@ -17,7 +17,8 @@
   padding: 0;
   background-color: rgba(146, 146, 146, 0.6);
   border-radius: 10px;
-  color: white; }
+  color: white;
+  font-family: "Neue Helvetica", Helvetica, sans-serif; }
   .notify h1 {
     background-color: #3366cc;
     margin: 0px;
@@ -189,6 +190,15 @@ article {
     caption-side: bottom;
     overflow: auto;
     max-height: calc(100vh-80px); }
+    article table thead, article table tbody {
+      display: block; }
+    article table tbody {
+      height: 80vh;
+      /* Just for the demo          */
+      overflow-y: auto;
+      /* Trigger vertical scroll    */
+      overflow-x: hidden;
+      /* Hide the horizontal scroll */ }
     article table th {
       text-align: left;
       background-color: #3366cc;

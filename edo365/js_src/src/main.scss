@@ -234,6 +234,14 @@ article {
         overflow: auto;
         max-height: calc(100vh-80px);
 
+        thead, tbody { display: block; }
+
+        tbody {
+            height: 80vh;       /* Just for the demo          */
+            overflow-y: auto;    /* Trigger vertical scroll    */
+            overflow-x: hidden;  /* Hide the horizontal scroll */
+        }
+
         th {
             text-align: left;
             background-color: $color1;
