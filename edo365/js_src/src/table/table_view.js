@@ -8,6 +8,8 @@ export class TableView {
         if(typeof target == 'string')
             target = document.querySelector(target);
         this.target = target
+        this.head = null;
+        this.body = null;
     }
 
     draw(){
@@ -28,7 +30,10 @@ export class TableView {
             cell.innerText = this.table.header[i];
             row.appendChild(cell);
         }
-        tab.appendChild(row);
+        this.head = document.createElement('thead');
+        this.head.appendChild(row)
+        tab.appendChild(this.head);
+        this.body = document.createElement('tbody');
         for(var i=0; i<this.table.length(); i++){
             row = document.createElement('tr');
             cell = document.createElement('td');
@@ -44,8 +49,9 @@ export class TableView {
                 cell.innerText = this.table.data[i][j];
                 row.appendChild(cell);
             }
-            tab.appendChild(row);
+            this.body.appendChild(row);
         }
+        tab.appendChild(this.body);
         tab.appendChild(caption);
         tab.onclick = this.on_click;
         
@@ -68,8 +74,8 @@ export class TableView {
     get_selected(col){
         var row, chk, r = [];
         if(col){
-            for(var i = 1; i < this.target.childElementCount; i++){
-                var row = this.target.childNodes[i];
+            for(var i = 0; i < this.body.childElementCount; i++){
+                var row = this.body.childNodes[i];
                 if(row.nodeName == 'TR'){
                     chk = row.childNodes[0].childNodes[0];
                     if (chk.checked)
@@ -77,8 +83,8 @@ export class TableView {
                 }
             }
         } else {
-            for(var i = 1; i < this.target.childElementCount; i++){
-                var row = this.target.childNodes[i];
+            for(var i = 0; i < this.body.childElementCount; i++){
+                var row = this.body.childNodes[i];
                 if(row.nodeName == 'TR'){
                     chk = row.childNodes[0].childNodes[0];
                     if (chk.checked)
