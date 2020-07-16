@@ -170,10 +170,15 @@ article {
     font-weight: 100;
     font-family: 'Neue Helvetica', Helvetica, sans-serif; }
     article section.header .content {
+      max-width: 600px;
+      width: 100%;
       position: absolute;
       bottom: 0;
       left: 50%;
       margin-left: -150px; }
+      article section.header .content h1 {
+        font-weight: 100;
+        font-size: xx-large; }
     article section.header img.bg {
       pointer-events: none;
       position: absolute;
