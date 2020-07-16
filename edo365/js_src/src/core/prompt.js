@@ -30,7 +30,7 @@ export class Notify {
     }
 
     timeout(sec){
-        setTimeout(this.exit.bind(this),sec);
+        setTimeout(this.exit.bind(this),sec*1000);
     }
 }
 
@@ -38,7 +38,7 @@ export class Notify {
 
 export class ProgressNotify extends Notify {
     constructor(title, max, value=0){
-        var pb = document.createElement('progess');
+        var pb = document.createElement('progress');
         pb.max = max;
         pb.value = value;
         super(title,pb);
