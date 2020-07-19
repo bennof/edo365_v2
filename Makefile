@@ -51,7 +51,7 @@ enable-ssl:
 build: init
 	pipenv run python manage.py makemigrations
 	pipenv run python manage.py migrate
-	pipenv run python manage.py collectstatic
+	echo yes | pipenv run python manage.py collectstatic
 
 # prepare
 init: .venv edo365/static/jsdox.js

@@ -20,21 +20,23 @@
         </div>
     </section>
 
-    <div class="boxed post full">
+    <section class="post full">
         <div class="content">
-    {% with categories=page.categories.all %}
-        {% if categories %}
-            <h3>Posted in:</h3>
-            <ul>
-                {% for category in categories %}
-                    <li style="display: inline">
-                        {% image category.icon fill-32x32 style="vertical-align: middle" %}
-                        {{ category.name }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+            {% with categories=page.categories.all %}
+                {% if categories %}
+                    <h3>Posted in:</h3>
+                    <ul>
+                        {% for category in categories %}
+                            <li style="display: inline">
+                                {% image category.icon fill-32x32 style="vertical-align: middle" %}
+                                {{ category.name }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </section>
 
     
 
@@ -42,16 +44,16 @@
         {% include_block block %}
     {% endfor %}
 
-    {% for item in page.gallery_images.all %}
-        <div style="float: left; margin: 10px">
-            {% image item.image fill-320x240 %}
-            <p>{{ item.caption }}</p>
+    <section>
+        <div class="content"></div>
+            {% for item in page.gallery_images.all %}
+                <div style="float: left; margin: 10px">
+                    {% image item.image fill-320x240 %}
+                    <p>{{ item.caption }}</p>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-
-            
-        </div>
-    </div>
+    </section>
 
     <section class="footer">
 
