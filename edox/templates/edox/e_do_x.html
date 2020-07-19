@@ -59,15 +59,15 @@
     <section class="footer">
 
         {% for post in page.get_children %}
-            <div  class="boxed content">
+            <div  class="boxed content" onclick="location.href='{%pageurl post%}';">
                 {% with doc=post.specific %}
                     {% with doc.hero as hero %}
-                        {% if hero %}{% image hero fill-200x100 %}{% endif %}
+                        {% if hero %}{% image hero fill-200x150 %}{% endif %}
                     {% endwith %}
                     <div>
                         <h2>{{ doc.title }}</h2>
                         <p>{{ doc.intro }}</p>
-                        <a href="{% pageurl post %}">read more</a>
+                        <!--<a href="{% pageurl post %}">read more</a>-->
                     </div>
                 {% endwith %}
             </div>
