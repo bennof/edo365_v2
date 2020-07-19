@@ -207,6 +207,7 @@ article {
 
         .content {
             width: 100%;
+            max-width: 100%;
             position: absolute;
             bottom: 0;
             > * {
@@ -294,11 +295,16 @@ article {
         -webkit-box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.37);
         -moz-box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.37);
         box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.37);
+        min-height: 150px;
+
+        h1, p {
+            margin: 5px;
+        }
 
         &:hover {
-            -webkit-box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.57);
-            -moz-box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.57);
-            box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.5); 
+            -webkit-box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.77);
+            -moz-box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.77);
+            box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.77); 
         }
 
         img {
@@ -316,10 +322,8 @@ article {
                 height: 200px;
                 margin: 0; 
             }
-        }
-        
+        } 
     }
-    
 }
 
 .has-menubar {
