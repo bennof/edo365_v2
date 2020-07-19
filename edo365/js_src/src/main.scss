@@ -8,7 +8,7 @@ $fonts2: 'Neue Helvetica', Helvetica, sans-serif;
 
 
 $text-color: #35393C;
-$text-hl-color: #5fc2f0;
+$text-hl-color: $color1;
 
 
 $header_bg_color: $text-color !default;
@@ -294,6 +294,19 @@ article {
         box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.37);
         img {
             float: left;
+            margin-right: 10px;
+            height: 100%;
+            width: 200px;
+            object-fit: cover;
+        }
+
+        @media only screen and (max-width: 600px)  {
+            img {
+                float: none;
+                width: 100%;
+                height: 200px;
+                margin: 0; 
+            }
         }
 
     }
