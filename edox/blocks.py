@@ -27,6 +27,7 @@ class PlotBlock(blocks.StructBlock):
         template = 'edox/blocks/plot.html'
 
 class TableBlock(blocks.StructBlock):
+    id = blocks.CharBlock(requires = False)
     src = DocumentChooserBlock(required = False)
     description = blocks.RichTextBlock(required = False)
     class Meta:

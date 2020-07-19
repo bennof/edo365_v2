@@ -1,3 +1,3 @@
-<table src="{{value.src.url}}">
+<table {% if value.id %} id="{{ value.id }}" {% endif %} {% if value.src %}src="{{value.src.url}}"{% endif %}>
     <caption>{{value.description}}</caption>
 </table>

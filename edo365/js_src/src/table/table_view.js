@@ -7,13 +7,12 @@ export class TableView {
         this.table = table 
         if(typeof target == 'string')
             target = document.querySelector(target);
-        this.target = target
+        this.target = target;
         this.head = null;
         this.body = null;
     }
 
     draw(){
-
         var caption = this.target.querySelector('caption');
         var tab = this.target;
         tab.innerHTML = "";
