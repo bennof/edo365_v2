@@ -45,6 +45,11 @@ a:hover {
     color: darken($color: $text-hl-color, $amount: 0.3);
 }
 
+h1 {
+    font-weight: lighter;
+    font-style: italic;
+}
+
 header {
     position: fixed;
     background-color: $header_bg_color;
@@ -281,6 +286,16 @@ article {
         margin: 4px 2px;
         cursor: pointer;
         border-radius: 5px;
+    }
+
+    .boxed {
+        -webkit-box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.37);
+        -moz-box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.37);
+        box-shadow: 0px 5px 7px -1px rgba(0,0,0,0.37);
+        img {
+            float: left;
+        }
+
     }
 }
 
