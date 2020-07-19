@@ -39,13 +39,17 @@
     </section>
 
     
+    <section>
+        <div class="content">
+            {% for block in page.body %}
+                {% include_block block %}
+            {% endfor %}
+        </div>
+    </section>
 
-    {% for block in page.body %}
-        {% include_block block %}
-    {% endfor %}
 
     <section>
-        <div class="content"></div>
+        <div class="content">
             {% for item in page.gallery_images.all %}
                 <div style="float: left; margin: 10px">
                     {% image item.image fill-320x240 %}
