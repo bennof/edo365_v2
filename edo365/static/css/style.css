@@ -15,6 +15,7 @@
 .notify {
   margin: 5px;
   padding: 0;
+  min-width: 25vw;
   background-color: rgba(146, 146, 146, 0.6);
   border-radius: 10px;
   color: white;
@@ -23,10 +24,10 @@
     background-color: #3366cc;
     margin: 0px;
     padding: 5px; }
-  .notify body {
+  .notify .body {
     margin: 0px;
     padding: 5px; }
-    .notify body progress {
+    .notify .body progress {
       margin: 5px; }
 
 html,

@@ -28,6 +28,7 @@ $fonts2: 'Neue Helvetica', Helvetica, sans-serif;
 .notify {
     margin: 5px;
     padding: 0;
+    min-width: 25vw;
     background-color: rgba($color4, 0.6);
     border-radius: 10px;
     color: white;
@@ -37,7 +38,7 @@ $fonts2: 'Neue Helvetica', Helvetica, sans-serif;
         margin: 0px;
         padding: 5px;
     }
-    body {
+    .body {
         margin: 0px;
         padding: 5px;
 

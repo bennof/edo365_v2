@@ -1,7 +1,8 @@
 var notify_block = null;
 
 export class Notify {
-    constructor(title, content){
+    constructor(id, title, content){
+        this.id = id
         if (notify_block == null){
             notify_block = document.createElement('div');
             notify_block.classList.add('notify_block');
@@ -14,7 +15,13 @@ export class Notify {
         var header = document.createElement('h1');
         header.innerHTML = title;
         box.appendChild(header);
+        var exit = document.createElement('button');
+        exit.style.float = 'right';
+        exit.innerText='x';
+        exit.onclick = this.exit.bind(this);
+        header.appendChild(exit);
         var body = document.createElement('div');
+        body.classList.add('body')
         if (typeof content == 'string')
             body.innerHTML += content;
         else

@@ -46,7 +46,6 @@ class EdoMenuItem(Orderable):
  
     @property
     def link(self):
-        
         if self.link_page:
             return self.link_page.url
         elif self.link_url:

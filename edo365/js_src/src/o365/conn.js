@@ -23,6 +23,7 @@ import {get_hash, decode_base64, encode_base64, get_header} from '../core/url'
 import {map} from '../core/tools';
 import {open, save} from '../core/file';
 import * as ready from '../core/pageready';
+import { Notify } from '../core/prompt';
 
 // used constants
 const  CONN_CFG = "_conn_cfg";
@@ -313,8 +314,27 @@ export class Connection {
         save(name,'text/json',JSON.stringify(this.config));
     }
 
-
     load_json_config_file(title){
+        var input = document.createElement('input');
+        input.type = 'file';
+        //sbox.appendChild(input);
+        var n =  new Notify(this.name+'_open_dialog', title, input);
+        var conn = this;
+        input.onchange = function(){
+            open(function(state,cfg){
+                if(state==200){
+                    this.config = JSON.parse(cfg);
+                    this.save_config();
+                } else {
+                    alert('ERRROR: '+ state + '\n' + cfg)
+                }
+            }.bind(conn), this.files[0]);
+            n.exit();
+        }
+        return n;
+    }
+
+    load_json_config_file2(title){
         if(document.getElementById(this.name+'_open_dialog'))
             return;
         var box = document.createElement('div');

@@ -95,22 +95,14 @@ export class TableView {
     }
 
     open_csv(title){
-        if(document.getElementById(this.table.name+'_open_dialog'))
-            return;
-        var box = document.createElement('div');
-        box.id = this.table.name+'_open_dialog';
-        box.classList.add('prompt');
-        var header = document.createElement('h1');
-        header.innerHTML = title;
-        box.appendChild(header);
         var input = document.createElement('input');
         input.type = 'file';
-        box.appendChild(input);
+        var n =  new Notify(this.table.name+'_open_dialog', title, input);
         var tab = this;
         input.onchange = function(){
             tab.table.open_csv(tab.draw,this.files[0]);
-            document.body.removeChild(box);
+            n.exit();
         }
-        document.body.appendChild(box);
+        return n;
     }
 }
