@@ -72,23 +72,32 @@
                 {% endwith %}
             </div>
         {% endfor %}
+    </section>
 
+    <section class="tags">
         {% if page.tags.all.count %}
-        <div class="tags">
-            <h5>Tags</h5>
+        <div class="content">
+            <h3>Tags</h3>
             {% for tag in page.tags.all %}
                 <a href="{% slugurl 'tags' %}?tag={{ tag }}">{{ tag }}</a>
             {% endfor %}
         </div>
         {% endif %}
-        
+    </section>
+
+    <section class="footer">
         <p>
             {% if page.get_parent.url %}
             <a href="{{ page.get_parent.url }}">Zurück</a>
             {% endif %}
-            {% if page.get_parent.url %}
-            <b><a href="{{ page.next }}">{{ page.next }}</a></b>
+            <span style="float:right">
+            {% if page.prev %}
+            <a href="{{ page.prev.url }}">Vorherige Seite</a></b>
             {% endif %}
+            {% if page.next %}
+            <a href="{{ page.next.url }}">Nächste Seite</a></b>
+            {% endif %}
+            </span>
         </p>
     </section>
 </article>

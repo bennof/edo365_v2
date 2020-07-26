@@ -9,12 +9,14 @@ $fonts2: 'Neue Helvetica', Helvetica, sans-serif;
 
 $text-color: #35393C;
 $text-hl-color: $color1;
+$text-hl-color2: $color3;
 
 
 $header_bg_color: $text-color !default;
 $header_bg_color_hl: darken( $color:$header_bg_color, $amount: 0.4) !default;
 $header_color: $text-hl-color !default;
 $header_color_hl: $text-hl-color !default;
+$header_color_hl2: $text-hl-color2 !default;
 
 $header_height: 40px !default;
 $header_height_inner: #{$header_height - 10px} !default;
@@ -42,12 +44,23 @@ a {
 }
 
 a:hover {
-    color: darken($color: $text-hl-color, $amount: 0.3);
+    color: $text-hl-color2;
 }
 
 h1 {
     font-weight: lighter;
     font-style: italic;
+}
+
+.vbox {
+    display: block;
+    width: 100%;
+    height: 50vh;
+    overflow-y: auto;
+}
+
+.hbox {
+    display: inline-block;
 }
 
 header {
@@ -81,7 +94,7 @@ header {
         font-weight: $header_font_weight;
 
         &:hover {
-            color: lighten($header_color_hl, 20);
+            color: $header_color_hl2;
         }
     }
 
@@ -112,7 +125,7 @@ header {
         min-width: 150px;
         overflow: auto;
         z-index:800;
-        background: rgba($header_bg_color, 1.0);
+        background: rgba($header_bg_color, 0.9);
         right: 0px;
         border-radius: 2px;
         border-left: 3px solid  $header_color;
@@ -273,10 +286,6 @@ article {
         }
     }
 
-    section.footer {
-        font-size: smaller;
-    }
-
     button {
         background-color: $color1;
         border: none;
@@ -327,6 +336,17 @@ article {
             }
         } 
     }
+
+    .tags, .footer {
+        font-size: small;
+        a {
+            font-family: $fonts2;
+            color: $color4;
+        }
+        a:hover{
+            color: $color3;
+        }
+    }
 }
 
 .has-menubar {
@@ -336,7 +356,7 @@ article {
 
 
 footer {
-    font-family: 'Neue Helvetica', Helvetica, sans-serif;
+    font-family: $fonts2;
     color: $color4;
     font-size: small;
     text-align: center;

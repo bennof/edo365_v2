@@ -57,5 +57,12 @@ class EDoX(Page):
         StreamFieldPanel('body'),
     ]
 
+
+    def prev(self):
+        return self.get_prev_siblings().live().first()
+
+    def next(self):
+        return self.get_next_siblings().live().first()
+
     class Meta:
         verbose_name = "EDoX"

@@ -2,17 +2,17 @@
 {% load wagtailimages_tags %}
 {% load static %}
  
-{% get_menu settings.edocore.MenuSettings.default_menu as navigation %}
+{% get_menu settings.edocore.SiteConfig.default_menu as navigation %}
 
 
 <header>
     <a class="logo" href="/">
     {% if settings.edocore.MenuSettings.logo %}
-        {% image settings.edocore.MenuSettings.logo height-40 alt=settings.blog.MenuSettings.name %}
+        {% image settings.edocore.SiteConfig.logo height-40 alt=settings.blog.SiteConfig.name %}
     {% elif settings.edocore.MenuSettings.static_logo %}
-        <img src="{% static settings.edocore.MenuSettings.static_logo %}" alt="{{ settings.edocore.MenuSettings.name }}" />
+        <img src="{% static settings.edocore.SiteConfig.static_logo %}" alt="{{ settings.edocore.SiteConfig.name }}" />
     {% else %}
-        <h1 class="logo">{{ settings.edocore.MenuSettings.name }}</h1></a>
+        <h1 class="logo">{{ settings.edocore.SiteConfig.name }}</h1></a>
     {% endif %}
     </a>
     <label for="menu_switch" class="menu">
@@ -40,7 +40,7 @@
         <li>
             <a id="login_link" href="javascript:conn.open()">Login</a>
         </li>
-        {% for item in navigation.menu_items.all %}
+        {% for item in navigation.edo_menu_items.all %}
             <li>
                 <a href="{{ item.link }}" 
                     {% if item.open_in_new_tab %} target="_blank"{% endif %}>

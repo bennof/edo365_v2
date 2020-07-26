@@ -70,3 +70,6 @@ edo365/static/jsdox.js: edo365/js_src/node_modules
 edo365/js_src/node_modules:
 	#npm init --prefix ./edo365/js_src/
 	npm install --prefix ./edo365/js_src/ --unsafe-perm node-sass
+
+requirements.txt:
+	pipenv lock -r > requirements.txt

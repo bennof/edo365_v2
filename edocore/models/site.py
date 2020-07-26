@@ -1,5 +1,6 @@
 from django.db import models
- 
+from django_extensions.db.fields import AutoSlugField
+
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
@@ -7,7 +8,7 @@ from wagtail.admin.edit_handlers import (
     MultiFieldPanel,
     InlinePanel,
     FieldPanel,
-    PageChooserPanel,
+    PageChooserPanel
 )
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.fields import RichTextField
@@ -34,7 +35,7 @@ class EdoMenuItem(Orderable):
     )
     open_in_new_tab = models.BooleanField(default=False, blank=True)
  
-    page = ParentalKey("EdoMenu", related_name="menu_items")
+    page = ParentalKey("EdoMenu", related_name="edo_menu_items")
  
     panels = [
         FieldPanel("link_title"),
@@ -45,6 +46,7 @@ class EdoMenuItem(Orderable):
  
     @property
     def link(self):
+        
         if self.link_page:
             return self.link_page.url
         elif self.link_url:
@@ -65,8 +67,8 @@ class EdoMenu(ClusterableModel):
     """The main menu clusterable model."""
  
     title = models.CharField(max_length=100)
-    # slug = AutoSlugField(populate_from="title", editable=True)
-    slug = models.SlugField()
+    slug = AutoSlugField(populate_from="title", editable=True)
+    #slug = models.SlugField()
  
     panels = [
         MultiFieldPanel([
@@ -92,6 +94,7 @@ class SiteConfig(BaseSetting):
     static_logo = models.CharField(
         max_length=128,
         blank=True)
+
     default_menu = models.CharField(
         max_length=64, 
         blank=True)
@@ -107,30 +110,6 @@ class SiteConfig(BaseSetting):
         max_length=64,
         blank=True)
 
-    impress = models.ForeignKey(
-        "wagtailcore.Page",
-        null=True,
-        blank=True,
-        related_name="+",
-        on_delete=models.CASCADE,
-    )
-
-    privacy_policy = models.ForeignKey(
-        "wagtailcore.Page",
-        null=True,
-        blank=True,
-        related_name="+",
-        on_delete=models.CASCADE,
-    )
-
-    terms_of_use = models.ForeignKey(
-        "wagtailcore.Page",
-        null=True,
-        blank=True,
-        related_name="+",
-        on_delete=models.CASCADE,
-    )
-
     footer_richt_text = RichTextField(blank=True)
 
     panels = [
@@ -138,19 +117,16 @@ class SiteConfig(BaseSetting):
             FieldPanel('name'),
             ImageChooserPanel('logo'),
             FieldPanel('static_logo'),
-            FieldPanel('static_logo'),
-            FieldPanel('static_logo')
         ],heading="Site"),
+
+        MultiFieldPanel([
+            FieldPanel('default_menu'),
+            FieldPanel('show_search_in_menu')
+        ],heading="Menu"),
 
         MultiFieldPanel([
             FieldPanel('copyright'),
             FieldPanel('contact'),
-        ],heading="Menu"),
-
-        MultiFieldPanel([
-            PageChooserPanel("impress"),
-            PageChooserPanel("privacy_policy"),
-            PageChooserPanel("terms_of_use"),
-            PageChooserPanel("footer_richt_text"),
+            FieldPanel("footer_richt_text"),
         ],heading="Footer"),
     ]
