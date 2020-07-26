@@ -1,4 +1,4 @@
-
+import {Notify} from '../core/prompt';
 import {Table} from './table';
 
 export class TableView {
