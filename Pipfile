@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 wagtail = "==2.9.3"
-Django = "==3.0.8"
+Django = "==3.0.12"
 gunicorn = "==20.0.4"
 django-extensions = "==3.0.3"
 asgiref = "==3.2.10"
